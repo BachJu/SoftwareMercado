@@ -5,7 +5,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-
 //Cadastra um novo produto
 void novoProduto(){
     //Limpa a tela
@@ -114,4 +113,20 @@ void novoProduto(){
 
     //Limpa tela
     limparTela();
+
+    FILE *arqProd;
+    arqProd = fopen("Produtos.csv", "a");
+    if (arqProd != NULL)
+    {
+        fprintf(arqProd, "%d;", novo.identificador);
+        fprintf(arqProd, "%s;", novo.setor);
+        fprintf(arqProd, "%s;", novo.nomeProd);
+        fprintf(arqProd, "%.2lf;", novo.preco);
+        fprintf(arqProd, "%d/", novo.validade.dia);
+        fprintf(arqProd, "%d/", novo.validade.mes);
+        fprintf(arqProd, "%d;", novo.validade.ano);
+        fprintf(arqProd, "%d\n", novo.estoque);
+        fclose(arqProd);
+    }
+    
 }
