@@ -5,9 +5,16 @@
 
 
 int main(){
+    Produtos produto;
+    Produtos *lista;
+    int qntProd;
+
+    qntProd = contProdutosCSV();
+    
     int index = 0;
     while (index != 9)
     {
+        lista = (Produtos *)malloc(sizeof(Produtos) * qntProd);
         index = menuInicial();
         switch (index)
         {
@@ -22,7 +29,9 @@ int main(){
             switch (index)
             {
             case 1:
-                novoProduto();
+                novoProduto(&produto);
+                arquivoCSV(produto, &qntProd);
+                printf("Produtos cadastrados: %d\n", qntProd);
                 break;
             
             default:
@@ -39,7 +48,7 @@ int main(){
             limparTela();
             break;
         }
+        free(lista);
     }
-    
     return 0;
 }
