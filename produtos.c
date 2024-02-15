@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
+#include <stdlib.h>
 
 //Cadastra um novo produto
 void novoProduto(Produtos *novoP){
@@ -127,7 +128,7 @@ void novoProduto(Produtos *novoP){
 }
 
 //Cria ou atualiza com novas entradas um arquivo em CSV
-int arquivoCSV(Produtos p, int *qntP){
+void arquivoCSV(Produtos p){
     
     //Cria um pontador do tipo arquivo
     FILE *arqProd;
@@ -146,8 +147,6 @@ int arquivoCSV(Produtos p, int *qntP){
         fprintf(arqProd, "%d;%s;%s;%.2lf;%d/%d/%d;%d\n", p.id, p.setor, p.nomeProd, p.preco, p.validade.dia, p.validade.mes, p.validade.ano, p.estoque);
         //Fecha e salva o arquivo
         fclose(arqProd);
-        //Aumnta 1 no contador de quantidade de produtos registrados
-        *qntP = *qntP + 1;
     }
     else{
 
@@ -157,11 +156,7 @@ int arquivoCSV(Produtos p, int *qntP){
         fprintf(arqProd, "%d;%s;%s;%.2lf;%d/%d/%d;%d\n", p.id, p.setor, p.nomeProd, p.preco, p.validade.dia, p.validade.mes, p.validade.ano, p.estoque);
         //Fecha e salva o arquivo
         fclose(arqProd);
-        //Aumenta 1 no contador de quantidade de produtos registrados
-        *qntP = *qntP + 1;
     }
-    //Retorna a quantidade de produtos registrados
-    return *qntP;
 }
 
 //Conta quantos produtos estão resgitrados no arquivo CSV
@@ -203,4 +198,68 @@ int contProdutosCSV(){
     }
     return contadorLinha;
 
+}
+
+void novoProdutoVetor(Produtos *lista, Produtos p,int fim){
+    lista[fim].id = p.id;
+    strcpy(lista[fim].setor, p.setor);
+    strcpy(lista[fim].nomeProd, p.nomeProd);
+    lista[fim].preco = p.preco;
+    lista[fim].validade.dia = p.validade.dia;
+    lista[fim].validade.mes = p.validade.mes;
+    lista[fim].validade.ano = p.validade.ano;
+    lista[fim].estoque = p.estoque;
+}
+
+void preencheLista(Produtos *lista){
+    FILE *csv;
+    char linha[1000];
+    char *campos;
+    const char s[2] = ";";
+    csv = fopen("Produtos.csv", "r");
+    if (csv != NULL)
+    {
+        // fim dos registros, reabrindo para ler os dados
+        fseek(csv, 0, SEEK_SET);
+        // lendo o cabeçalho do arquivo
+        fscanf(csv, " %[^\n]s", linha);
+        // alocando memoria para os registros lidos
+
+        int i = 0;
+        while (fscanf(csv, " %[^\n]s", linha) != EOF)
+        {
+            // separando os dados de uma linha
+            campos = strtok(linha, s);
+            int campoAtual = 0;
+            while (campos != NULL)
+            {
+                switch (campoAtual)
+                {
+                case 0:
+                    lista[i].id = atoi(campos);
+                    break;
+                case 1:
+                    strcpy(lista[i].setor, campos);
+                    break;
+                case 2:
+                    strcpy(lista[i].nomeProd, campos);
+                    break;
+                case 3:
+                    lista[i].preco = atof(campos);
+                    break;
+                case 5:
+                    lista[i].estoque = atoi(campos);
+                    break;
+                default:
+                    break;
+                }
+                campos = strtok(NULL, s);
+
+                campoAtual++;
+            }
+
+            i++;
+            // dados do setor;
+        }
+    }
 }
