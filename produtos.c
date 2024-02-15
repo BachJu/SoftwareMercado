@@ -200,17 +200,6 @@ int contProdutosCSV(){
 
 }
 
-void novoProdutoVetor(Produtos *lista, Produtos p,int fim){
-    lista[fim].id = p.id;
-    strcpy(lista[fim].setor, p.setor);
-    strcpy(lista[fim].nomeProd, p.nomeProd);
-    lista[fim].preco = p.preco;
-    lista[fim].validade.dia = p.validade.dia;
-    lista[fim].validade.mes = p.validade.mes;
-    lista[fim].validade.ano = p.validade.ano;
-    lista[fim].estoque = p.estoque;
-}
-
 void preencheLista(Produtos *lista){
     FILE *csv;
     char linha[1000];
@@ -261,5 +250,100 @@ void preencheLista(Produtos *lista){
             i++;
             // dados do setor;
         }
+    }
+}
+
+void atualizaProdutos(Produtos *lista, int qntProd){
+    //Limpa a tela
+    limparTela();
+
+    //Separador estético
+    separador();
+    
+    int index = 0;
+    int i =0;
+    char nome[50];
+    printf("Digite o nome do produto que será alterado: ");
+    scanf(" %[^\n]s", nome);
+    while (i < qntProd && strcmp(lista[i].nomeProd, nome) !=0)
+    {
+        i++;
+    }
+    if (i == qntProd)
+    {
+        printf("Não foi possível encontrar o produto.\nCadastre o produto na sessão de cadastro.\n");
+        getchar();
+        getchar();
+        limparTela();
+    }
+    else{
+        while (index != 9)
+        {
+            index = menuAtualiza();
+
+            switch (index)
+            {
+            case 1:
+                separador();
+
+                printf("Digite um novo ID para o produto %s: ", lista[i].nomeProd);
+                scanf(" %d", &lista[i].id);
+                printf("Esse é o novo ID: %d\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].id);
+                getchar();
+                getchar();
+                break;
+            case 2:
+                printf("Digite um novo setor para o produto %s: ", lista[i].nomeProd);
+                scanf(" %[^\n]s", lista[i].setor);
+                printf("Esse é o novo setor: %s\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].setor);
+                getchar();
+                getchar();
+                break;
+            case 3:
+                printf("Digite um novo nome para o produto %s: ", lista[i].nomeProd);
+                scanf(" %[^\n]s", lista[i].nomeProd);
+                printf("Esse é o novo nome: %s\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].nomeProd);
+                getchar();
+                getchar();
+                break;
+            case 4:
+                printf("Digite um novo preco para o produto %s: ", lista[i].nomeProd);
+                scanf(" %lf", &lista[i].preco);
+                printf("Esse é o novo preco: %.2lf\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].preco);
+                getchar();
+                getchar();
+                break;
+            case 5:
+                printf("Digite uma nova data de validade para o produto %s. \n", lista[i].nomeProd);
+                printf("Dia: ");
+                scanf(" %d", &lista[i].validade.dia);
+                printf("Mes: ");
+                scanf(" %d", &lista[i].validade.mes);
+                printf("Ano: ");
+                scanf(" %d", &lista[i].validade.ano);
+                printf("Esse é a nova data de validade: %d/%d/%d\nCaso esteja errada, poderá alterá-la novamente.", lista[i].validade.dia, lista[i].validade.mes, lista[i].validade.ano);
+                getchar();
+                getchar();
+                break;
+            case 7:
+                printf("Digite uma nova quantidade no estoque para o produto %s: ", lista[i].nomeProd);
+                scanf(" %d", &lista[i].estoque);
+                printf("Esse é o nova quantidade: %d\nCaso esteja errada, poderá alterá-la novamente.", lista[i].estoque);
+                getchar();
+                getchar();
+                break;
+            case 9:
+                printf("Saindo...");
+                getchar();
+                getchar();
+                break;
+            default:
+                printf("Não é um digito válido");
+                getchar();
+                getchar();
+                break;
+            }
+        }
+        
     }
 }

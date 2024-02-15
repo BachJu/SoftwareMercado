@@ -44,9 +44,10 @@ int main(){
             case 1:
                 novoProduto(&produto);
                 arquivoCSV(produto);
-                novoProdutoVetor(lista, produto, qntProd);
                 break;
-            
+            case 2:
+                atualizaProdutos(lista, qntProd);
+                break;
             default:
                 break;
             }

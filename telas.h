@@ -22,6 +22,8 @@ int menuClintes();
 */
 int menuProdutos();
 
+int menuAtualiza();
+
 /**
  * Limpa a tela
 */

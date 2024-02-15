@@ -120,6 +120,32 @@ int menuProdutos(){
     return index;
 }
 
+
+int menuAtualiza(){
+    int index;
+    
+    //Separador estético
+    separador();
+
+    printf("O que deseja alterar\n");
+    printf("1. ID\n");
+    printf("2. Setor\n");
+    printf("3. Nome do produto\n");
+    printf("4. Preco\n");
+    printf("5. Data de validade\n");
+    printf("6. Quantidade em estoque\n");
+    printf("9. Sair");
+    
+    //Separador estético
+    separador();
+
+    scanf(" %d", &index);
+
+    limparTela();
+    
+    return index;
+}
+
 //Função para Limpar a tela
 void limparTela(){
 

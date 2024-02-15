@@ -32,13 +32,11 @@ void arquivoCSV(Produtos p);
 int contProdutosCSV();
 
 /**
- * Preenche o vetor "lista" (ver main.c) com o novo produto
- * @param lista Passa por referência o vetor com o mesmo nome
- * @param p Variável do tipo "Produtos" que foi preenchida pelo usuário
- * @param fim Variável que aponta para o final do vetor "lista"
+ * Preenche um vetor com as informações no arquivo "Produtos.csv", caso o arquivo exista
+ * @param lista Vetor de registros do tipo "Produtos" que será preenchida com as informações do arquivo "Produtos.csv"
 */
-void novoProdutoVetor(Produtos *lista, Produtos p,int fim);
-
 void preencheLista(Produtos *lista);
+
+void atualizaProdutos(Produtos *lista, int qntProd);
 
 #endif
