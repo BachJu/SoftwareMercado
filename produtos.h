@@ -31,12 +31,29 @@ void arquivoCSV(Produtos p);
  */
 int contProdutosCSV();
 
+void sParaData(char *campos, Produtos *lista, int i);
+
 /**
  * Preenche um vetor com as informações no arquivo "Produtos.csv", caso o arquivo exista
  * @param lista Vetor de registros do tipo "Produtos" que será preenchida com as informações do arquivo "Produtos.csv"
 */
 void preencheLista(Produtos *lista);
 
-void atualizaProdutos(Produtos *lista, int qntProd);
+/**
+ * Atualiza o produto desejado e retorna "1" ou "0"
+ * @param lista Vetor de registros do tipo "Produtos" que será feita busca pelo produto que será alterado
+ * @param qntProd Tamando total do vetor para que a busca seja feita até seu tamanho máximo
+*/
+int atualizaProdutos(Produtos *lista, int qntProd);
+
+/**
+ * Atualiza o arquivo "Produtos.csv" com as novas informações
+ * @param lista Vetor de registros do tipo "Produto" que será colocada no arquivo "Produtos.csv"
+ * @param qntProd Tamanho total do vetor
+ * @param controle Recebe o valor "0" ou "1", caso for 1, então o arquivo será alterado
+*/
+void atualizaArquivoCSV(Produtos *lista, int qntProd, int controle);
+
+void baixoEstoque(Produtos *lista, int qntProd);
 
 #endif

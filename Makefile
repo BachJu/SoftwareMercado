@@ -1,8 +1,8 @@
 all: mercadoApp
 
-mercadoApp: main.o telas.o produtos.o
+mercadoApp: main.o telas.o produtos.o data.o
 
-	gcc -o mercadoApp main.o telas.o produtos.o -ggdb
+	gcc -o mercadoApp main.o telas.o produtos.o data.o -ggdb
 main.o: main.c
 
 	gcc -o main.o -c main.c -Wall -ggdb
@@ -14,3 +14,7 @@ telas.o: telas.c
 produtos.o: produtos.c
 
 	gcc -o produtos.o -c produtos.c -Wall -ggdb
+
+data.o: data.c
+
+	gcc -o data.o -c data.c -Wall -ggdb

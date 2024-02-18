@@ -7,6 +7,6 @@ typedef struct Data
     int mes;
     int ano;
 } Data;
-
+void stringParaData(char *str, Data *data);
 
 #endif

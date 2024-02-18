@@ -236,6 +236,9 @@ void preencheLista(Produtos *lista){
                 case 3:
                     lista[i].preco = atof(campos);
                     break;
+                case 4:
+                    stringParaData(campos, &lista[i].validade);
+                    break;
                 case 5:
                     lista[i].estoque = atoi(campos);
                     break;
@@ -253,13 +256,14 @@ void preencheLista(Produtos *lista){
     }
 }
 
-void atualizaProdutos(Produtos *lista, int qntProd){
+int atualizaProdutos(Produtos *lista, int qntProd){
     //Limpa a tela
     limparTela();
 
     //Separador estético
     separador();
-    
+    int aux,j;
+    bool verifica = false;
     int index = 0;
     int i =0;
     char nome[50];
@@ -275,6 +279,7 @@ void atualizaProdutos(Produtos *lista, int qntProd){
         getchar();
         getchar();
         limparTela();
+        return 0;
     }
     else{
         while (index != 9)
@@ -288,6 +293,42 @@ void atualizaProdutos(Produtos *lista, int qntProd){
 
                 printf("Digite um novo ID para o produto %s: ", lista[i].nomeProd);
                 scanf(" %d", &lista[i].id);
+                while (!(verifica))
+                {
+                    j = 0;
+                    while (j < i && lista[j].id != lista[i].id)
+                    {
+                        j++;
+                    }
+                    if (lista[j].id == lista[i].id && i != j)
+                    {
+                        aux = lista[j].id;
+                        while (aux == lista[i].id)
+                        {
+                            printf("Já foi usado.\n");
+                            scanf(" %d", &lista[i].id);
+                        }   
+                    }
+                    else{
+                        j = i + 1;
+                        while (j > i && j < qntProd && lista[i].id != lista[j].id)
+                        {
+                            j++;
+                        }
+                        if (lista[j].id == lista[i].id)
+                        {
+                            aux = lista[j].id;
+                            while (aux == lista[i].id)
+                            {
+                                printf("Já foi usado.\n");
+                                scanf(" %d", &lista[i].id);
+                            } 
+                        }
+                        else{
+                            verifica = true;
+                        }
+                    }
+                }    
                 printf("Esse é o novo ID: %d\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].id);
                 getchar();
                 getchar();
@@ -309,6 +350,11 @@ void atualizaProdutos(Produtos *lista, int qntProd){
             case 4:
                 printf("Digite um novo preco para o produto %s: ", lista[i].nomeProd);
                 scanf(" %lf", &lista[i].preco);
+                while (lista[i].preco < 0)
+                {
+                    printf("Esse não é um valor válido.\nDigite um valor válido: ");
+                    scanf(" %lf", &lista[i].preco);
+                } 
                 printf("Esse é o novo preco: %.2lf\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].preco);
                 getchar();
                 getchar();
@@ -317,17 +363,37 @@ void atualizaProdutos(Produtos *lista, int qntProd){
                 printf("Digite uma nova data de validade para o produto %s. \n", lista[i].nomeProd);
                 printf("Dia: ");
                 scanf(" %d", &lista[i].validade.dia);
+                while (lista[i].validade.dia < 0 || lista[i].validade.dia > 31)
+                {
+                    printf("Esse não é um dia válido.\nDigite um dia válido: ");
+                    scanf(" %d", &lista[i].validade.dia);
+                } 
                 printf("Mes: ");
                 scanf(" %d", &lista[i].validade.mes);
+                while (lista[i].validade.mes < 0 || lista[i].validade.mes > 12)
+                {
+                    printf("Esse não é um mês válido.\nDigite um mês válido: ");
+                    scanf(" %d", &lista[i].validade.mes);
+                }
                 printf("Ano: ");
                 scanf(" %d", &lista[i].validade.ano);
+                while (lista[i].validade.ano < 2024)
+                {
+                    printf("Esse não é um ano válido.\nDigite um ano válido: ");
+                    scanf(" %d", &lista[i].validade.ano);
+                }
                 printf("Esse é a nova data de validade: %d/%d/%d\nCaso esteja errada, poderá alterá-la novamente.", lista[i].validade.dia, lista[i].validade.mes, lista[i].validade.ano);
                 getchar();
                 getchar();
                 break;
-            case 7:
+            case 6:
                 printf("Digite uma nova quantidade no estoque para o produto %s: ", lista[i].nomeProd);
                 scanf(" %d", &lista[i].estoque);
+                while (lista[i].estoque < 0)
+                {
+                    printf("Esse não é uma quantidade válida.\nDigite uma quantidade válida: ");
+                    scanf(" %d", &lista[i].estoque);
+                }
                 printf("Esse é o nova quantidade: %d\nCaso esteja errada, poderá alterá-la novamente.", lista[i].estoque);
                 getchar();
                 getchar();
@@ -344,6 +410,49 @@ void atualizaProdutos(Produtos *lista, int qntProd){
                 break;
             }
         }
+        return 1;
+    }
+}
+
+void atualizaArquivoCSV(Produtos *lista, int qntProd, int controle){
+    FILE *arquivoCSV;
+    arquivoCSV = fopen("Produtos.csv", "r");
+    if (arquivoCSV != NULL && controle == 1)
+    {
+        arquivoCSV = fopen("Produtos.csv", "w");
+        fprintf(arquivoCSV, "Id;Setor;Nome;Preço;Data de Validade;Estoque\n");
+        for (int i = 0; i < qntProd; i++)
+        {
+            fprintf(arquivoCSV, "%d;%s;%s;%.2lf;%d/%d/%d;%d\n", lista[i].id, lista[i].setor, lista[i].nomeProd, lista[i].preco, lista[i].validade.dia, lista[i].validade.mes, lista[i].validade.ano, lista[i].estoque);
+        }
+        fclose(arquivoCSV);
+    }
+}
+
+void baixoEstoque(Produtos *lista, int qntProd){
+    bool estoqueBaixo = false;
+    if (qntProd > 0)
+    {
+        for (int i = 0; i < qntProd; i++)
+        {
+            if (lista[i].estoque <= 5)
+            {
+                printf("%s está com estoque baixo.\n", lista[i].nomeProd);
+                printf("Setor: %s\n", lista[i].setor);
+                estoqueBaixo = true;
+            }
+        }
+        if (!(estoqueBaixo))
+        {
+            printf("Não há produtos com estoque baixo.\n");
+            getchar();
+            getchar();
+            limparTela();
+        }
         
     }
+    else{
+        printf("Não existem produtos cadastrados");
+    }
+    
 }

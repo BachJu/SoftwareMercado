@@ -20,6 +20,8 @@ int main(){
     //Inicializa uma variável inteira com 0 para entrar no menu principal
     int index = 0;
 
+    int controle;
+
     //Menu principal
     while (index != 9)
     {
@@ -46,7 +48,11 @@ int main(){
                 arquivoCSV(produto);
                 break;
             case 2:
-                atualizaProdutos(lista, qntProd);
+                controle = atualizaProdutos(lista, qntProd);
+                atualizaArquivoCSV(lista, qntProd, controle);
+                break;
+            case 4:
+                baixoEstoque(lista, qntProd);
                 break;
             default:
                 break;
