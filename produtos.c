@@ -476,6 +476,7 @@ void prodPorSetor(Produtos *lista, int qntProd){
         char setor[6][20];
         char aux[20];
         bool verifica;
+        int i = 0;
         for (int i = 0; i < 6; i++)
         {
             switch (i)
@@ -504,7 +505,7 @@ void prodPorSetor(Produtos *lista, int qntProd){
             strcpy(setor[i], aux);
         }
         int cont = 0;
-        for (int i = 0; i < 6; i++)
+        for (; i < 6; i++)
         {
             verifica = false;
             cont = 0;
@@ -523,10 +524,10 @@ void prodPorSetor(Produtos *lista, int qntProd){
             {
                 printf("Não há produtos cadastrados nesse setor.\n");
             } 
+            getchar();
+            getchar();
+            limparTela();
         }
-        getchar();
-        getchar();
-        limparTela();
     }
     else{
         printf("Não há produtos cadastrados.\n");

@@ -15,7 +15,7 @@ int menuVendas();
 /**
  * Apresenta as opções cliente para o usuário
 */
-int menuClintes();
+int menuClientes();
 
 /**
  * Apresenta as opções produto para o usuário

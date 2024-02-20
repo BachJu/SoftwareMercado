@@ -59,7 +59,7 @@ int menuVendas(){
 }
 
 //Menu de Clientes
-int menuClintes(){
+int menuClientes(){
     
     //Limpa a tela
     limparTela();

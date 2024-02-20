@@ -3,9 +3,11 @@
 #include <string.h>
 #include "telas.h"
 #include "produtos.h"
+#include "clientes.h"
 
 //Inicializa o main
 int main(){
+    Clientes cliente;
     //Cria uma variável do tipo "Produtos" (ver "produtos.h")
     Produtos produto;
 
@@ -37,7 +39,17 @@ int main(){
             index = menuVendas();
             break;
         case 2:
-            index = menuClintes();
+            index = menuClientes();
+            switch (index)
+            {
+            case 1:
+                novoCliente(&cliente);
+                arquivoCSVCliente(cliente);
+                break;
+            
+            default:
+                break;
+            }
             break;
         case 3:
             index = menuProdutos();
