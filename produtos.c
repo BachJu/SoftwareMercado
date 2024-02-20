@@ -293,8 +293,10 @@ int atualizaProdutos(Produtos *lista, int qntProd){
 
                 printf("Digite um novo ID para o produto %s: ", lista[i].nomeProd);
                 scanf(" %d", &lista[i].id);
+                verifica = false;
                 while (!(verifica))
                 {
+                    verifica = false;
                     j = 0;
                     while (j < i && lista[j].id != lista[i].id)
                     {
@@ -305,7 +307,7 @@ int atualizaProdutos(Produtos *lista, int qntProd){
                         aux = lista[j].id;
                         while (aux == lista[i].id)
                         {
-                            printf("Já foi usado.\n");
+                            printf("Esse número de ID já foi utilizado.\nPor gentileza, digite um ID diferente.\n");
                             scanf(" %d", &lista[i].id);
                         }   
                     }
@@ -320,7 +322,7 @@ int atualizaProdutos(Produtos *lista, int qntProd){
                             aux = lista[j].id;
                             while (aux == lista[i].id)
                             {
-                                printf("Já foi usado.\n");
+                                printf("Esse número de ID já foi utilizado.\nPor gentileza, digite um ID diferente.\n");
                                 scanf(" %d", &lista[i].id);
                             } 
                         }
@@ -336,6 +338,43 @@ int atualizaProdutos(Produtos *lista, int qntProd){
             case 2:
                 printf("Digite um novo setor para o produto %s: ", lista[i].nomeProd);
                 scanf(" %[^\n]s", lista[i].setor);
+                //Declara variáveis de contole para comparar com o que o usuário digitar
+                bool hig = false, limp = false, beb = false, frio = false, pad = false, aco = false;
+                while (!(hig || limp || beb || frio || pad || aco))
+                {
+                    if (strcmp(lista[i].setor, "Higiene") == 0)
+                    {
+                        hig = true;
+                    }
+                    else if (strcmp(lista[i].setor, "Limpeza") == 0)
+                    {
+                        limp = true;
+                    }
+                    else if (strcmp(lista[i].setor, "Bebidas") == 0)
+                    {
+                        beb = true;
+                    }
+                    else if (strcmp(lista[i].setor, "Frios") == 0)
+                    {
+                        frio = true;
+                    }
+                    else if (strcmp(lista[i].setor, "Padaria") == 0)
+                    {
+                        pad = true;
+                    }
+                    else if (strcmp(lista[i].setor, "Acougue") == 0)
+                    {
+                        aco = true;
+                    }
+                        
+                    //Caso os valores continuem falsos, pede para o usuário digitar uma nova string
+                    if (!(hig || limp || beb || frio || pad || aco))
+                    {
+                        printf("O setor esta incorreto e/ou nao existe.\n");
+                        printf("Os setores validos sao: \nAcougue;\nBebidas;\nFrios;\nHigiene;\nLimpeza;\nPadaria;\n");
+                        scanf(" %[^\n]s", lista[i].setor);
+                    }  
+                }
                 printf("Esse é o novo setor: %s\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].setor);
                 getchar();
                 getchar();
@@ -402,6 +441,7 @@ int atualizaProdutos(Produtos *lista, int qntProd){
                 printf("Saindo...");
                 getchar();
                 getchar();
+                limparTela();
                 break;
             default:
                 printf("Não é um digito válido");
@@ -429,6 +469,73 @@ void atualizaArquivoCSV(Produtos *lista, int qntProd, int controle){
     }
 }
 
+void prodPorSetor(Produtos *lista, int qntProd){
+    limparTela();
+    if (qntProd > 0)
+    {
+        char setor[6][20];
+        char aux[20];
+        bool verifica;
+        for (int i = 0; i < 6; i++)
+        {
+            switch (i)
+            {
+            case 0:
+                strcpy(aux, "Acougue");
+                break;
+            case 1:
+                strcpy(aux, "Bebidas");
+                break;
+            case 2:
+                strcpy(aux, "Frios");
+                break;
+            case 3:
+                strcpy(aux, "Higiene");
+                break;
+            case 4:
+                strcpy(aux, "Padaria");
+                break;
+            case 5:
+                strcpy(aux, "Limpeza");
+                break;
+            default:
+                break;
+            }
+            strcpy(setor[i], aux);
+        }
+        int cont = 0;
+        for (int i = 0; i < 6; i++)
+        {
+            verifica = false;
+            cont = 0;
+            printf("\n%s:\n", setor[i]);
+            for (int j = 0; j < qntProd; j++)
+            {
+                if (strcmp(lista[j].setor, setor[i]) == 0)
+                {
+                    printf("%d. %s;\n", cont +1, lista[j].nomeProd);
+                    verifica = true;
+                    cont++;
+                }
+                
+            }
+            if (!(verifica))
+            {
+                printf("Não há produtos cadastrados nesse setor.\n");
+            } 
+        }
+        getchar();
+        getchar();
+        limparTela();
+    }
+    else{
+        printf("Não há produtos cadastrados.\n");
+        getchar();
+        getchar();
+        limparTela();
+    }
+}
+
 void baixoEstoque(Produtos *lista, int qntProd){
     bool estoqueBaixo = false;
     if (qntProd > 0)
@@ -437,6 +544,7 @@ void baixoEstoque(Produtos *lista, int qntProd){
         {
             if (lista[i].estoque <= 5)
             {
+                getchar();
                 printf("%s está com estoque baixo.\n", lista[i].nomeProd);
                 printf("Setor: %s\n", lista[i].setor);
                 estoqueBaixo = true;
@@ -449,7 +557,10 @@ void baixoEstoque(Produtos *lista, int qntProd){
             getchar();
             limparTela();
         }
-        
+        else{
+            getchar();
+            limparTela();
+        }
     }
     else{
         printf("Não existem produtos cadastrados");

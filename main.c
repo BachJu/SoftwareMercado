@@ -51,6 +51,9 @@ int main(){
                 controle = atualizaProdutos(lista, qntProd);
                 atualizaArquivoCSV(lista, qntProd, controle);
                 break;
+            case 3:
+                prodPorSetor(lista, qntProd);
+                break;
             case 4:
                 baixoEstoque(lista, qntProd);
                 break;
@@ -60,6 +63,9 @@ int main(){
             break;
         case 9:
             printf("Saindo do programa...");
+            getchar();
+            getchar();
+            limparTela();
             break;
         default:
             printf("Nao e uma opcao valida");

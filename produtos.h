@@ -31,8 +31,6 @@ void arquivoCSV(Produtos p);
  */
 int contProdutosCSV();
 
-void sParaData(char *campos, Produtos *lista, int i);
-
 /**
  * Preenche um vetor com as informações no arquivo "Produtos.csv", caso o arquivo exista
  * @param lista Vetor de registros do tipo "Produtos" que será preenchida com as informações do arquivo "Produtos.csv"
@@ -54,6 +52,13 @@ int atualizaProdutos(Produtos *lista, int qntProd);
 */
 void atualizaArquivoCSV(Produtos *lista, int qntProd, int controle);
 
+void prodPorSetor(Produtos *lista, int qntProd);
+
+/**
+ * Mostra ao usuário produtos que tem estoque igual ou menor que 5
+ * @param lista Vetor de registros do tipo "Produto"
+ * @param qntProd Tamanho total do vetor
+*/
 void baixoEstoque(Produtos *lista, int qntProd);
 
 #endif
