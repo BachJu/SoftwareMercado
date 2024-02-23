@@ -26,8 +26,6 @@ void novoCliente(Clientes *novoC){
     }
     printf("Digite o seu nome: ");
     scanf(" %[^\n]s", novoC->nome);
-    printf("Seu cpf é: %s", novoC->cpf);
-
     printf("Digite sua data de nascimento.\n");
     printf("Dia: ");
     scanf(" %d", &novoC->nascimento.dia);
@@ -51,8 +49,8 @@ void novoCliente(Clientes *novoC){
         printf("Ano invalido.\nDigite o ano: ");
         scanf(" %d", &novoC->nascimento.ano);
     }
-    novoC->idade = 2024 - novoC->nascimento.ano;
-    printf("Essa é a sua idade: %d\n", novoC->idade);
+    printf("Digite a sua idade: ");
+    scanf(" %d", &novoC->idade);
     printf("Digite seu endereço: ");
     scanf(" %[^\n]s", novoC->endereco);
     printf("Digite sua cidade: ");
@@ -79,4 +77,44 @@ void arquivoCSVCliente(Clientes c){
         fclose(arqClien);
     }
     
+}
+
+//Conta quantos produtos estão resgitrados no arquivo CSV
+int contClientesCSV(){
+    //Abre o arquivo
+    FILE *arq;
+    //Caracter para guardar as informações lidas
+    char linha[1000];
+    //Ponteiro para usar a função strtok
+    char *campos;
+    //Caracter para sinalizar a "quebra" do token na função strtok
+    const char s[2] = ";";
+    //Contador de linhas
+    int contadorLinha = 0;
+    arq = fopen("Cliente.csv", "r");
+    if (arq != NULL)
+    {
+        // fim dos registros, reabrindo para ler os dados
+        fseek(arq, 0, SEEK_SET);
+        // lendo o cabeçalho do arquivo
+        fscanf(arq, " %[^\n]s", linha);
+        // alocando memoria para os registros lidos
+
+        int i = 0;
+        while (fscanf(arq, " %[^\n]s", linha) != EOF)
+        {
+            // separando os dados de uma linha
+            campos = strtok(linha, s);
+            while (campos != NULL)
+            {
+                campos = strtok(NULL, s);
+            }
+            i++;
+            // dados do setor;
+        }
+        contadorLinha = i;
+        fclose(arq);
+    }
+    return contadorLinha;
+
 }

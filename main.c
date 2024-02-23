@@ -16,6 +16,7 @@ int main(){
 
     //Cria variável do tipo inteiro
     int qntProd;
+    int qntC;
 
     //Atribui valor para a variavel inteira com a quantidade de produtos cadastrados no arquivo "Produtos.csv"
     
@@ -29,65 +30,78 @@ int main(){
     {
         //Cria vetor de variáveis do tipo "Produtos" com a quantidade de produtos como máximo 
         qntProd = contProdutosCSV();
+        qntC = contClientesCSV();
+        printf("Clientes cadastrados : %d", qntC);
         lista = (Produtos *)malloc(sizeof(Produtos) * qntProd);
         preencheLista(lista);
         //Chama o menu principal e atribui o valor da opção escolhida na variável de controle "Index"
-        index = menuInicial();
-        switch (index)
+        if (lista != NULL)
         {
-        case 1:
-            index = menuVendas();
-            break;
-        case 2:
-            index = menuClientes();
+            index = menuInicial();
             switch (index)
             {
             case 1:
-                novoCliente(&cliente);
-                arquivoCSVCliente(cliente);
-                break;
-            
-            default:
-                break;
-            }
-            break;
-        case 3:
-            index = menuProdutos();
-            switch (index)
-            {
-            case 1:
-                novoProduto(&produto);
-                arquivoCSV(produto);
+                index = menuVendas();
                 break;
             case 2:
-                controle = atualizaProdutos(lista, qntProd);
-                atualizaArquivoCSV(lista, qntProd, controle);
+                index = menuClientes();
+                switch (index)
+                {
+                case 1:
+                    novoCliente(&cliente);
+                    arquivoCSVCliente(cliente);
+                    break;
+                
+                default:
+                    break;
+                }
                 break;
             case 3:
-                prodPorSetor(lista, qntProd);
+                index = menuProdutos();
+                switch (index)
+                {
+                case 1:
+                    novoProduto(&produto);
+                    arquivoCSV(produto);
+                    break;
+                case 2:
+                    controle = atualizaProdutos(lista, qntProd);
+                    atualizaArquivoCSV(lista, qntProd, controle);
+                    break;
+                case 3:
+                    prodPorSetor(lista, qntProd);
+                    break;
+                case 4:
+                    baixoEstoque(lista, qntProd);
+                    break;
+                default:
+                    break;
+                }
                 break;
-            case 4:
-                baixoEstoque(lista, qntProd);
+            case 9:
+                printf("Saindo do programa...");
+                getchar();
+                getchar();
+                limparTela();
                 break;
             default:
+                printf("Nao e uma opcao valida");
+                getchar();
+                getchar();
+                limparTela();
                 break;
             }
-            break;
-        case 9:
-            printf("Saindo do programa...");
-            getchar();
-            getchar();
-            limparTela();
-            break;
-        default:
-            printf("Nao e uma opcao valida");
-            getchar();
-            getchar();
-            limparTela();
-            break;
+            //Limpa o vetor de "Produtos"
+            free(lista);
         }
-        //Limpa o vetor de "Produtos"
+        else{
+            printf("Algo deu errado.");
+        }   
+    }
+    if (lista != NULL)
+    {
         free(lista);
     }
+    
     return 0;
 }

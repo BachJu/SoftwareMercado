@@ -18,4 +18,10 @@ void novoCliente(Clientes *novoC);
 
 void arquivoCSVCliente(Clientes c);
 
+ /**
+  * Conta quantos clientes estão registrados no arquivo "Clientes.csv"
+  * Caso arquivo não existir, retorna 0 como parâmetro
+ */
+int contClientesCSV();
+
 #endif

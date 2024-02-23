@@ -26,7 +26,7 @@ void novoProduto(Produtos *novoP);
 void arquivoCSV(Produtos p);
  
  /**
-  * Conta quantos prodtuos estão registrados no arquivo "Produtos.csv"
+  * Conta quantos produtos estão registrados no arquivo "Produtos.csv"
   * Caso arquivo não existir, retorna 0 como parâmetro
  */
 int contProdutosCSV();

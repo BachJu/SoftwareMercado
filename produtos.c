@@ -14,8 +14,8 @@ void novoProduto(Produtos *novoP){
     //Separador estético
     separador();
 
-    //Declara variáveis de contole para comparar com o que o usuário digitar
-    bool hig = false, limp = false, beb = false, frio = false, pad = false, aco = false;
+    //Declara variável de contole para comparar com o que o usuário digitar
+    bool verifica = false;
     
     //Pede o identificador do novo produto que será cadastrado
     printf("Digite o codigo do produto: ");
@@ -35,35 +35,14 @@ void novoProduto(Produtos *novoP){
     //Verifica se é um setor válido através de comparação de strings e usando valores booleanos para controle
     //Sendo esses setores: "Higiene", "Limpeza", "Bebidas", "Frios", "Padaria" e "Acougue"
     scanf(" %[^\n]s", novoP->setor);
-    while (!(hig || limp || beb || frio || pad || aco))
+    while (!(verifica))
     {
-        if (strcmp(novoP->setor, "Higiene") == 0)
+        if (strcmp(novoP->setor, "Higiene") == 0 || strcmp(novoP->setor, "Limpeza") == 0 || strcmp(novoP->setor, "Bebidas") == 0 || strcmp(novoP->setor, "Frios") == 0 || strcmp(novoP->setor, "Padaria") == 0 || strcmp(novoP->setor, "Acougue") == 0)
         {
-            hig = true;
+            verifica = true;
         }
-        else if (strcmp(novoP->setor, "Limpeza") == 0)
-        {
-            limp = true;
-        }
-        else if (strcmp(novoP->setor, "Bebidas") == 0)
-        {
-            beb = true;
-        }
-        else if (strcmp(novoP->setor, "Frios") == 0)
-        {
-            frio = true;
-        }
-        else if (strcmp(novoP->setor, "Padaria") == 0)
-        {
-            pad = true;
-        }
-        else if (strcmp(novoP->setor, "Acougue") == 0)
-        {
-            aco = true;
-        }
-        
         //Caso os valores continuem falsos, pede para o usuário digitar uma nova string
-        if (!(hig || limp || beb || frio || pad || aco))
+        else
         {
             printf("O setor esta incorreto e/ou nao existe.\n");
             printf("Os setores validos sao: \nAcougue;\nBebidas;\nFrios;\nHigiene;\nLimpeza;\nPadaria;\n");
