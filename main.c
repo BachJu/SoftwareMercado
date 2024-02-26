@@ -41,13 +41,6 @@ int main(){
         //Chama o menu principal e atribui o valor da opção escolhida na variável de controle "Index"
         if (lista != NULL && clientes != NULL)
         {
-            for (int i = 0; i < qntC; i++)
-            {
-                printf("CPF: %s\nNome: %s\nData de nascimento: %d/%d/%d\nIdade: %d\nEndereço: %s\nCidade: %s\nEstado: %s\nPontos: %d\n"
-                , clientes[i].cpf, clientes[i].nome, clientes[i].nascimento.dia, clientes[i].nascimento.mes, clientes[i].nascimento.ano, clientes[i].idade,
-                clientes[i].endereco, clientes[i].cidade, clientes[i].estado, clientes[i].pontos);
-            }
-            
             index = menuInicial();
             switch (index)
             {
@@ -61,6 +54,9 @@ int main(){
                 case 1:
                     novoCliente(&cliente);
                     arquivoCSVCliente(cliente);
+                    break;
+                case 3:
+                    controle = atualizaCliente(clientes, qntProd);
                     break;
                 
                 default:
@@ -110,15 +106,6 @@ int main(){
             printf("Algo deu errado.");
         }   
     }
-    if (lista != NULL)
-    {
-        free(lista);
-    }
-    if (clientes != NULL)
-    {
-        free(clientes);
-    }
-    
-    
+
     return 0;
 }

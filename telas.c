@@ -73,8 +73,9 @@ int menuClientes(){
     //Opções para Clientes
     printf("1. Cadastrar Novo Cliente\n");
     printf("2. Atualizar Pontuação\n");
-    printf("3. Listar Clientes entre 18 e 25\n");
-    printf("4. Listar Clientes acima de 1000 pontos\n");
+    printf("3. Atualizar Cliente\n");
+    printf("4. Listar Clientes entre 18 e 25\n");
+    printf("5. Listar Clientes acima de 1000 pontos\n");
     printf("9. Sair");
 
     //Separador estético
@@ -121,7 +122,7 @@ int menuProdutos(){
 }
 
 
-int menuAtualiza(){
+int menuAtualizaProd(){
     int index;
     
     //Separador estético
@@ -134,6 +135,32 @@ int menuAtualiza(){
     printf("4. Preco\n");
     printf("5. Data de validade\n");
     printf("6. Quantidade em estoque\n");
+    printf("9. Sair");
+    
+    //Separador estético
+    separador();
+
+    scanf(" %d", &index);
+
+    limparTela();
+    
+    return index;
+}
+
+int menuAtualizaC(){
+    int index;
+    
+    //Separador estético
+    separador();
+
+    printf("O que deseja alterar\n");
+    printf("1. CPF\n");
+    printf("2. Nome\n");
+    printf("3. Data de nascimento\n");
+    printf("4. Idade\n");
+    printf("5. Endereço\n");
+    printf("6. Cidade\n");
+    printf("7. Estado\n");
     printf("9. Sair");
     
     //Separador estético

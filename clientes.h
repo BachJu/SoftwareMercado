@@ -30,4 +30,6 @@ int contClientesCSV();
 */
 void preencheClientes(Clientes *clientes);
 
+int atualizaCliente(Clientes *clientes, int qntC);
+
 #endif

@@ -211,3 +211,47 @@ void preencheClientes(Clientes *clientes){
         }
     }
 }
+int atualizaCliente(Clientes *clientes, int qntC){
+    //Limpa a tela
+    limparTela();
+
+    //Separador estético
+    separador();
+    int aux,j;
+    bool verifica = false;
+    int index = 0;
+    int i =0;
+    char cpf[14];
+    printf("Digite o cpf do cliente: ");
+    scanf(" %[^\n]s", cpf);
+    while (i < qntC && strcmp(clientes[i].cpf, cpf) !=0)
+    {
+        i++;
+    }
+    if (i == qntC)
+    {
+        printf("Não foi possível encontrar o cliente.\nCadastre o cliente na sessão de cadastro.\n");
+        getchar();
+        getchar();
+        limparTela();
+        return 0;
+    }
+    else{
+        while (index !=9)
+        {
+            index = menuAtualizaC();
+            switch (index)
+            {
+            case 1:
+                printf("Digite o novo cpf: ");
+                scanf(" %[^\n]s", clientes->cpf);
+                printf("Esse é o novo cpf %s", clientes->cpf);
+                break;
+            
+            default:
+                break;
+            }
+        }
+        return 1;
+    }
+}

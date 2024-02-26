@@ -22,7 +22,9 @@ int menuClientes();
 */
 int menuProdutos();
 
-int menuAtualiza();
+int menuAtualizaProd();
+
+int menuAtualizaC();
 
 /**
  * Limpa a tela

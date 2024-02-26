@@ -132,7 +132,8 @@ void arquivoCSV(Produtos p){
         //Abre o arquivo para acrescentar informações
         arqProd = fopen("Produtos.csv", "a");
         //Acrescenta as informações necessárias
-        fprintf(arqProd, "%d;%s;%s;%.2lf;%d/%d/%d;%d\n", p.id, p.setor, p.nomeProd, p.preco, p.validade.dia, p.validade.mes, p.validade.ano, p.estoque);
+        fprintf(arqProd, "\n");
+        fprintf(arqProd, "%d;%s;%s;%.2lf;%d/%d/%d;%d", p.id, p.setor, p.nomeProd, p.preco, p.validade.dia, p.validade.mes, p.validade.ano, p.estoque);
         //Fecha e salva o arquivo
         fclose(arqProd);
     }
@@ -263,7 +264,7 @@ int atualizaProdutos(Produtos *lista, int qntProd){
     else{
         while (index != 9)
         {
-            index = menuAtualiza();
+            index = menuAtualizaProd();
 
             switch (index)
             {
