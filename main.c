@@ -107,5 +107,19 @@ int main(){
         }   
     }
 
+    if(lista != NULL)
+    {
+        free(lista);
+    }
+
+    if(clientes != NULL)
+    {
+        free(clientes);
+    }
+
+    getchar();
+    getchar();
+    printf("Atualizado")
+
     return 0;
 }
