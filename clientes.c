@@ -1,27 +1,59 @@
 #include "telas.h"
 #include "clientes.h"
+#include "data.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdbool.h>
 
 void novoCliente(Clientes *novoC){
-    bool temLet = true;
+    bool invalido = true, temLet;
     
     separador();
     printf("Digite o seu cpf: ");
     scanf(" %[^\n]s", novoC->cpf);
-    while (temLet)
+    while (invalido)
     {
+        invalido = false;
         temLet = false;
-        for (int i = 0; i < 13; i++)
+        while ((strlen(novoC->cpf) < 14) || (strlen(novoC->cpf) > 14))
         {
-            if ((novoC->cpf[i] < '0') || (novoC->cpf[i] > '9') || (strlen(novoC->cpf) < 13) || (strlen(novoC->cpf) > 13))
+            printf("Cpf inválido.\nDigite o seu cpf: ");
+            scanf(" %[^\n]s", novoC->cpf);
+            invalido = true;
+        }
+        for (int i = 0; i < 14; i++)
+        {
+            if (i == 3 || i == 7)
             {
-                printf("Cpf inválido.\nDigite o seu cpf: ");
-                scanf(" %[^\n]s", novoC->cpf);
-                temLet = true;
+                while (novoC->cpf[i] != '.')
+                {
+                    printf("Há algo de errado no cpf.\nO formato é XXX.XXX.XXX-XX.\nFalta um .\n");
+                    scanf(" %c", &novoC->cpf[i]);
+                }  
             }
+            else{
+                if (i == 11)
+                {
+                    while (novoC->cpf[i] != '-')
+                    {
+                        printf("Há algo de errado no cpf.\nO formato é XXX.XXX.XXX-XX.\nFalta um -\n");
+                        scanf(" %c", &novoC->cpf[i]);
+                    } 
+                }
+                else{
+                    if (novoC->cpf[i] < '0' || novoC->cpf[i] > '9')
+                    {
+                        temLet = true;
+                    }
+                }
+            }
+        }
+        if (temLet)
+        {
+            invalido = true;
+            printf("O cpf possui letras.\nDigite o cpf novamente: ");
+            scanf(" %[^\n]s", novoC->cpf);
         }
     }
     printf("Digite o seu nome: ");
@@ -63,20 +95,20 @@ void novoCliente(Clientes *novoC){
 void arquivoCSVCliente(Clientes c){
     FILE *arqClien;
 
-    arqClien = fopen("Cliente.csv", "r");
+    arqClien = fopen("Clientes.csv", "r");
     if (arqClien == NULL)
     {
-        arqClien = fopen("Cliente.csv", "w");
+        arqClien = fopen("Clientes.csv", "w");
         fprintf(arqClien, "CPF;Nome;Data de Nascimento;Idade;Endereço;Cidade;Estado;Pontos\n");
         fprintf(arqClien, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d\n", c.cpf, c.nome, c.nascimento.dia, c.nascimento.mes, c.nascimento.ano, c.idade, c.endereco, c.cidade, c.estado, c.pontos);
         fclose(arqClien);
     }
     else{
-        arqClien = fopen("Cliente.csv", "a");
-        fprintf(arqClien, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d\n", c.cpf, c.nome, c.nascimento.dia, c.nascimento.mes, c.nascimento.ano, c.idade, c.endereco, c.cidade, c.estado, c.pontos);
+        arqClien = fopen("Clientes.csv", "a");
+        fprintf(arqClien, "\n");
+        fprintf(arqClien, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d", c.cpf, c.nome, c.nascimento.dia, c.nascimento.mes, c.nascimento.ano, c.idade, c.endereco, c.cidade, c.estado, c.pontos);
         fclose(arqClien);
     }
-    
 }
 
 //Conta quantos produtos estão resgitrados no arquivo CSV
@@ -91,7 +123,7 @@ int contClientesCSV(){
     const char s[2] = ";";
     //Contador de linhas
     int contadorLinha = 0;
-    arq = fopen("Cliente.csv", "r");
+    arq = fopen("Clientes.csv", "r");
     if (arq != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
@@ -117,4 +149,65 @@ int contClientesCSV(){
     }
     return contadorLinha;
 
+}
+
+void preencheClientes(Clientes *clientes){
+    FILE *csv;
+    char linha[1000];
+    char *campos;
+    const char s[2] = ";";
+    csv = fopen("Clientes.csv", "r");
+    if (csv != NULL)
+    {
+        // fim dos registros, reabrindo para ler os dados
+        fseek(csv, 0, SEEK_SET);
+        // lendo o cabeçalho do arquivo
+        fscanf(csv, " %[^\n]s", linha);
+        // alocando memoria para os registros lidos
+
+        int i = 0;
+        while (fscanf(csv, " %[^\n]s", linha) != EOF)
+        {
+            // separando os dados de uma linha
+            campos = strtok(linha, s);
+            int campoAtual = 0;
+            while (campos != NULL)
+            {
+                switch (campoAtual)
+                {
+                case 0:
+                    strcpy(clientes[i].cpf, campos);
+                    break;
+                case 1:
+                    strcpy(clientes[i].nome, campos);
+                    break;
+                case 2:
+                    stringParaData(campos, &clientes[i].nascimento);
+                    break;
+                case 3:
+                    clientes[i].idade = atoi(campos);
+                    break;
+                case 4:
+                    strcpy(clientes[i].endereco, campos);
+                    break;
+                case 5:
+                    strcpy(clientes[i].cidade, campos);
+                    break;
+                case 6:
+                    strcpy(clientes[i].estado, campos);
+                    break;
+                case 7:
+                    clientes[i].pontos = atoi(campos);
+                    break;
+                default:
+                    break;
+                }
+                campos = strtok(NULL, s);
+
+                campoAtual++;
+            }
+            i++;
+            // dados do setor;
+        }
+    }
 }

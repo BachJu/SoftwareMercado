@@ -13,6 +13,7 @@ int main(){
 
     //Cria um ponteiro do tipo "Produtos"
     Produtos *lista;
+    Clientes *clientes;
 
     //Cria variável do tipo inteiro
     int qntProd;
@@ -31,12 +32,22 @@ int main(){
         //Cria vetor de variáveis do tipo "Produtos" com a quantidade de produtos como máximo 
         qntProd = contProdutosCSV();
         qntC = contClientesCSV();
-        printf("Clientes cadastrados : %d", qntC);
+
         lista = (Produtos *)malloc(sizeof(Produtos) * qntProd);
         preencheLista(lista);
+        
+        clientes = (Clientes *)malloc(sizeof(Clientes) * qntC);
+        preencheClientes(clientes);
         //Chama o menu principal e atribui o valor da opção escolhida na variável de controle "Index"
-        if (lista != NULL)
+        if (lista != NULL && clientes != NULL)
         {
+            for (int i = 0; i < qntC; i++)
+            {
+                printf("CPF: %s\nNome: %s\nData de nascimento: %d/%d/%d\nIdade: %d\nEndereço: %s\nCidade: %s\nEstado: %s\nPontos: %d\n"
+                , clientes[i].cpf, clientes[i].nome, clientes[i].nascimento.dia, clientes[i].nascimento.mes, clientes[i].nascimento.ano, clientes[i].idade,
+                clientes[i].endereco, clientes[i].cidade, clientes[i].estado, clientes[i].pontos);
+            }
+            
             index = menuInicial();
             switch (index)
             {
@@ -93,6 +104,7 @@ int main(){
             }
             //Limpa o vetor de "Produtos"
             free(lista);
+            free(clientes);
         }
         else{
             printf("Algo deu errado.");
@@ -102,6 +114,11 @@ int main(){
     {
         free(lista);
     }
+    if (clientes != NULL)
+    {
+        free(clientes);
+    }
+    
     
     return 0;
 }
