@@ -217,6 +217,7 @@ int atualizaCliente(Clientes *clientes, int qntC){
 
     //Separador estético
     separador();
+    bool verifica = false;
     int index = 0;
     int i;
     char cpf[14];

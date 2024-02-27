@@ -105,6 +105,7 @@ int main(){
             }
             //Limpa o vetor de "Produtos"
             free(lista);
+            //Limpa o vetor de "Clientes"
             free(clientes);
         }
         else{
@@ -116,7 +117,6 @@ int main(){
     {
         free(lista);
     }
-
     if(clientes != NULL)
     {
         free(clientes);
