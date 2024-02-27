@@ -154,13 +154,11 @@ int menuAtualizaC(){
     separador();
 
     printf("O que deseja alterar\n");
-    printf("1. CPF\n");
-    printf("2. Nome\n");
-    printf("3. Data de nascimento\n");
-    printf("4. Idade\n");
-    printf("5. Endereço\n");
-    printf("6. Cidade\n");
-    printf("7. Estado\n");
+    printf("1. Nome\n");
+    printf("2. Idade\n");
+    printf("3. Endereço\n");
+    printf("4. Cidade\n");
+    printf("5. Estado\n");
     printf("9. Sair");
     
     //Separador estético

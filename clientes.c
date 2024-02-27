@@ -218,15 +218,19 @@ int atualizaCliente(Clientes *clientes, int qntC){
 
     //Separador estético
     separador();
-    int aux,j;
     bool verifica = false;
     int index = 0;
-    int i =0;
+    int i;
     char cpf[14];
     printf("Digite o cpf do cliente: ");
     scanf(" %[^\n]s", cpf);
-    while (i < qntC && strcmp(clientes[i].cpf, cpf) !=0)
+    printf("%s", cpf);
+    printf("\n%d\n", strcmp(clientes[1].cpf, cpf));
+    i = 0;
+    while (strcmp(clientes[i].cpf, cpf) !=0 && i < qntC)
     {
+        printf("\n%s\n", clientes[i].cpf);
+        printf("\n%d\n", strcmp(clientes[i].cpf, cpf));
         i++;
     }
     if (i == qntC)
@@ -244,11 +248,32 @@ int atualizaCliente(Clientes *clientes, int qntC){
             switch (index)
             {
             case 1:
-                printf("Digite o novo cpf: ");
-                scanf(" %[^\n]s", clientes->cpf);
-                printf("Esse é o novo cpf %s", clientes->cpf);
+                printf("Digite o novo nome: ");
+                scanf(" %[^\n]s", clientes[i].nome);
+                printf("Esse é o novo nome %s.\nCaso esteja errado, poderá alterá-lo novamente", clientes[i].nome);
                 break;
-            
+            case 2:
+                printf("Digite a nova idade: ");
+                scanf(" %d", &clientes[i].idade);
+                break;
+            case 3:
+                printf("Digite o novo endereço: ");
+                scanf(" %[^\n]s", clientes[i].endereco);
+                break;
+            case 4:
+                printf("Digite a nova cidade: ");
+                scanf(" %[^\n]s", clientes[i].cidade);
+                break;
+            case 5:
+                printf("Digite o novo estado: ");
+                scanf(" %[^\n]s", clientes[i].estado);
+                break;
+            case 9:
+                printf("Voltando ao menu principal...");
+                getchar();
+                getchar();
+                limparTela();
+                break;
             default:
                 break;
             }

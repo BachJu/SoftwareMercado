@@ -25,11 +25,19 @@ void arquivoCSVCliente(Clientes c);
 int contClientesCSV();
 
 /**
- * Preenche um vetor com as informações no arquivo "Produtos.csv", caso o arquivo exista
- * @param clientes Vetor de registros do tipo "Produtos" que será preenchida com as informações do arquivo "Produtos.csv"
+ * Preenche um vetor com as informações no arquivo "Clientes.csv", caso o arquivo exista
+ * @param clientes Vetor de registros do tipo "Clientes" que será preenchida com as informações do arquivo "Clientes.csv"
 */
 void preencheClientes(Clientes *clientes);
 
 int atualizaCliente(Clientes *clientes, int qntC);
+
+/**
+ * Atualiza o arquivo "Clientes.csv" com as novas informações
+ * @param lista Vetor de registros do tipo "Clientes" que será colocada no arquivo "Clientes.csv"
+ * @param qntC Tamanho total do vetor
+ * @param controle Recebe o valor "0" ou "1", caso for 1, então o arquivo será alterado
+*/
+void atualizaClientesCSV(Clientes *clientes, int qntC, int controle);
 
 #endif
