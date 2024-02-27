@@ -7,7 +7,7 @@
 #include <stdbool.h>
 
 void novoCliente(Clientes *novoC){
-    bool invalido = true, temLet;
+    bool invalido = true, temLetra;
     
     separador();
     printf("Digite o seu cpf: ");
@@ -15,7 +15,7 @@ void novoCliente(Clientes *novoC){
     while (invalido)
     {
         invalido = false;
-        temLet = false;
+        temLetra = false;
         while ((strlen(novoC->cpf) < 14) || (strlen(novoC->cpf) > 14))
         {
             printf("Cpf inválido.\nDigite o seu cpf: ");
@@ -44,18 +44,19 @@ void novoCliente(Clientes *novoC){
                 else{
                     if (novoC->cpf[i] < '0' || novoC->cpf[i] > '9')
                     {
-                        temLet = true;
+                        temLetra = true;
                     }
                 }
             }
         }
-        if (temLet)
+        if (temLetra)
         {
             invalido = true;
             printf("O cpf possui letras.\nDigite o cpf novamente: ");
             scanf(" %[^\n]s", novoC->cpf);
         }
     }
+    printf("CPF: %s", novoC->cpf);
     printf("Digite o seu nome: ");
     scanf(" %[^\n]s", novoC->nome);
     printf("Digite sua data de nascimento.\n");

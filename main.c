@@ -46,6 +46,9 @@ int main(){
             {
             case 1:
                 index = menuVendas();
+
+                //novo case aqui
+
                 break;
             case 2:
                 index = menuClientes();
@@ -119,7 +122,7 @@ int main(){
 
     getchar();
     getchar();
-    printf("Atualizado")
-
+    printf("%d\n", strcmp("A", "B"));
+    //afsfaskelfas
     return 0;
 }
