@@ -32,7 +32,7 @@ int main(){
         //Cria vetor de variáveis do tipo "Produtos" com a quantidade de produtos como máximo 
         qntProd = contProdutosCSV();
         qntC = contClientesCSV();
-
+        printf("Essa é a quantidade de clientes: %d", qntC);
         lista = (Produtos *)malloc(sizeof(Produtos) * qntProd);
         preencheLista(lista);
         
@@ -41,6 +41,11 @@ int main(){
         //Chama o menu principal e atribui o valor da opção escolhida na variável de controle "Index"
         if (lista != NULL && clientes != NULL)
         {
+            for (int i = 0; i < qntC; i++)
+            {
+                printf("\nCPF: %s", clientes[i].cpf);
+            }
+            
             index = menuInicial();
             switch (index)
             {
@@ -56,7 +61,7 @@ int main(){
                     arquivoCSVCliente(cliente);
                     break;
                 case 3:
-                    controle = atualizaCliente(clientes, qntProd);
+                    controle = atualizaCliente(clientes, qntC);
                     break;
                 
                 default:
@@ -116,10 +121,6 @@ int main(){
     {
         free(clientes);
     }
-
-    getchar();
-    getchar();
-    printf("Atualizado")
 
     return 0;
 }
