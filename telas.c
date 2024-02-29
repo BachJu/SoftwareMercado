@@ -129,12 +129,11 @@ int menuAtualizaProd(){
     separador();
 
     printf("O que deseja alterar\n");
-    printf("1. ID\n");
-    printf("2. Setor\n");
-    printf("3. Nome do produto\n");
-    printf("4. Preco\n");
-    printf("5. Data de validade\n");
-    printf("6. Quantidade em estoque\n");
+    printf("1. Setor\n");
+    printf("2. Nome do produto\n");
+    printf("3. Preço\n");
+    printf("4. Data de validade\n");
+    printf("5. Quantidade em estoque\n");
     printf("9. Sair");
     
     //Separador estético

@@ -41,6 +41,7 @@ int main(){
         //Chama o menu principal e atribui o valor da opção escolhida na variável de controle "Index"
         if (lista != NULL && clientes != NULL)
         {
+            int idProd = lista[qntProd - 1].id;
             index = menuInicial();
             switch (index)
             {
@@ -58,10 +59,20 @@ int main(){
                     novoCliente(&cliente);
                     arquivoCSVCliente(cliente);
                     break;
-                case 3:
-                    controle = atualizaCliente(clientes, qntProd);
+                case 2:
+                    controle = atualizaPontos(clientes, qntC);
+                    atualizaClientesCSV(clientes, qntC, controle);
                     break;
-                
+                case 3:
+                    controle = atualizaCliente(clientes, qntC);
+                    atualizaClientesCSV(clientes, qntC, controle);
+                    break;
+                case 4:
+                    idadeClientes(clientes, qntC);
+                    break;
+                case 5:
+                    maisPontos(clientes, qntC);
+                    break;
                 default:
                     break;
                 }
@@ -71,7 +82,7 @@ int main(){
                 switch (index)
                 {
                 case 1:
-                    novoProduto(&produto);
+                    novoProduto(&produto, idProd);
                     arquivoCSV(produto);
                     break;
                 case 2:
@@ -120,9 +131,5 @@ int main(){
         free(clientes);
     }
 
-    getchar();
-    getchar();
-    printf("%d\n", strcmp("A", "B"));
-    //afsfaskelfas
     return 0;
 }

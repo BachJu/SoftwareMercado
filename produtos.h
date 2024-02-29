@@ -15,8 +15,9 @@ typedef struct Produtos
 /**
  * Cadastra um novo produto
  * @param novoP Passa por referência uma variável do tipo "Produtos"
+ * @param lista Passa 
 */
-void novoProduto(Produtos *novoP);
+void novoProduto(Produtos *novoP, int idProd);
 
 
 /**

@@ -10,7 +10,7 @@ void novoCliente(Clientes *novoC){
     bool invalido = true, temLetra;
     
     separador();
-    printf("Digite o seu cpf: ");
+    printf("Digite o seu cpf no formato XXX.XXX.XXX-XX: ");
     scanf(" %[^\n]s", novoC->cpf);
     while (invalido)
     {
@@ -28,7 +28,7 @@ void novoCliente(Clientes *novoC){
             {
                 while (novoC->cpf[i] != '.')
                 {
-                    printf("Há algo de errado no cpf.\nO formato é XXX.XXX.XXX-XX.\nFalta um .\n");
+                    printf("Há algo de errado no cpf.\nO formato é XXX.XXX.XXX-XX.\nEstá faltando um .\nPor gentileza, digite '.'\n");
                     scanf(" %c", &novoC->cpf[i]);
                 }  
             }
@@ -37,7 +37,7 @@ void novoCliente(Clientes *novoC){
                 {
                     while (novoC->cpf[i] != '-')
                     {
-                        printf("Há algo de errado no cpf.\nO formato é XXX.XXX.XXX-XX.\nFalta um -\n");
+                        printf("Há algo de errado no cpf.\nO formato é XXX.XXX.XXX-XX.\nEstá faltando um -\nPor gentileza, digite '-'\n");
                         scanf(" %c", &novoC->cpf[i]);
                     } 
                 }
@@ -84,6 +84,12 @@ void novoCliente(Clientes *novoC){
     }
     printf("Digite a sua idade: ");
     scanf(" %d", &novoC->idade);
+    while ((2024 - novoC->nascimento.ano) != novoC->idade && ((2024 - novoC->nascimento.ano) - 1) != novoC->idade)
+    {
+        printf("A idade está inconsistente com o ano de nascimento.\nPor gentileza, digite a idade novamente: ");
+        scanf(" %d", &novoC->idade);
+    }
+    
     printf("Digite seu endereço: ");
     scanf(" %[^\n]s", novoC->endereco);
     printf("Digite sua cidade: ");
@@ -218,21 +224,16 @@ int atualizaCliente(Clientes *clientes, int qntC){
 
     //Separador estético
     separador();
-    bool verifica = false;
+    int i = 0;
     int index = 0;
-    int i;
-    char cpf[14];
-    printf("Digite o cpf do cliente: ");
+    char cpf[50];
+    printf("Digite o cpf do cliente que será alterado: ");
     scanf(" %[^\n]s", cpf);
-    printf("%s", cpf);
-    printf("\n%d\n", strcmp(clientes[1].cpf, cpf));
-    i = 0;
-    while (strcmp(clientes[i].cpf, cpf) !=0 && i < qntC)
+    while (i < qntC && strcmp(clientes[i].cpf,cpf)!=0)
     {
-        printf("\n%s\n", clientes[i].cpf);
-        printf("\n%d\n", strcmp(clientes[i].cpf, cpf));
         i++;
     }
+    
     if (i == qntC)
     {
         printf("Não foi possível encontrar o cliente.\nCadastre o cliente na sessão de cadastro.\n");
@@ -248,25 +249,54 @@ int atualizaCliente(Clientes *clientes, int qntC){
             switch (index)
             {
             case 1:
+                separador();
                 printf("Digite o novo nome: ");
                 scanf(" %[^\n]s", clientes[i].nome);
                 printf("Esse é o novo nome %s.\nCaso esteja errado, poderá alterá-lo novamente", clientes[i].nome);
+                getchar();
+                getchar();
+                limparTela();
                 break;
             case 2:
+                separador();
                 printf("Digite a nova idade: ");
                 scanf(" %d", &clientes[i].idade);
+                while (clientes[i].idade <= 0)
+                {
+                    printf("Não é uma idade válida.\nPor gentileza, digite uma nova idade.\n");
+                    scanf(" %d", &clientes[i].idade);
+                }
+                printf("Esse é a nova idade %d.\nCaso esteja errado, poderá alterá-la novamente", clientes[i].idade);
+                getchar();
+                getchar();
+                limparTela();
                 break;
             case 3:
+                separador();
                 printf("Digite o novo endereço: ");
                 scanf(" %[^\n]s", clientes[i].endereco);
+                printf("Esse é o novo endereço %s.\nCaso esteja errado, poderá alterá-lo novamente", clientes[i].endereco);
+                getchar();
+                getchar();
+                limparTela();
                 break;
             case 4:
+                separador();
                 printf("Digite a nova cidade: ");
                 scanf(" %[^\n]s", clientes[i].cidade);
+                printf("Esse é a nova cidade %s.\nCaso esteja errado, poderá alterá-la novamente", clientes[i].cidade);
+                getchar();
+                getchar();
+                limparTela();
                 break;
             case 5:
+                separador();
                 printf("Digite o novo estado: ");
                 scanf(" %[^\n]s", clientes[i].estado);
+                printf("Esse é o novo estado %s.\nCaso esteja errado, poderá alterá-lo novamente", clientes[i].estado);
+                getchar();
+                getchar();
+                limparTela();
                 break;
             case 9:
                 printf("Voltando ao menu principal...");
@@ -275,9 +305,112 @@ int atualizaCliente(Clientes *clientes, int qntC){
                 limparTela();
                 break;
             default:
+                printf("Não é um digito válido");
                 break;
             }
         }
         return 1;
     }
+}
+
+int atualizaPontos(Clientes *clientes, int qntC){
+    int i =0;
+    int pontos;
+    char cpf[20];
+    separador();
+    printf("Digite o cpf para atualizar os pontos: ");
+    scanf(" %[^\n]s", cpf);
+    while (i < qntC && strcmp(clientes[i].cpf, cpf) != 0)
+    {
+        i++;
+    }
+    if (i ==  qntC)
+    {
+        printf("Esse cpf não está cadastrado.\nPor gentileza, cadaste o cliente antes de alterar a pontuação.");
+        getchar();
+        getchar();
+        limparTela();
+        return 0;
+    }
+    else{
+        separador();
+        printf("Essa é a pontuação atual: %d\n", clientes[i].pontos);
+        printf("Digite a quantidade de pontos a ser acrescentada: ");
+        scanf(" %d", &pontos);
+        while (pontos < 0)
+        {
+            printf("Quantidade inválida.\nPor gentileza, digite a nova quantidade de pontos: ");
+            scanf(" %d", &pontos);
+        }
+        clientes[i].pontos += pontos;
+        printf("Essa é a nova pontuação: %d", clientes[i].pontos);
+        getchar();
+        getchar();
+        limparTela();
+        return 1;
+    }
+}
+
+void atualizaClientesCSV(Clientes *clientes, int qntC, int controle){
+    FILE *arqC;
+    arqC = fopen("Clientes.csv", "r");
+    if (arqC != NULL)
+    {
+        if (controle == 1)
+        {
+            arqC = fopen("Clientes.csv", "w");
+            fprintf(arqC, "CPF;Nome;Nascimento;Idade;Endereço;Cidade;Estado;pontos\n");
+            for (int i = 0; i < qntC; i++)
+            {
+                fprintf(arqC, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d\n",
+                clientes[i].cpf, clientes[i].nome, clientes[i].nascimento.dia, clientes[i].nascimento.mes, clientes[i].nascimento.ano,
+                clientes[i].idade, clientes[i].endereco, clientes[i].cidade, clientes[i].estado, clientes[i].pontos);
+            }    
+        }
+        fclose(arqC);
+    }
+}
+
+void idadeClientes(Clientes *clientes, int qntC){
+    int cont = 0;
+    for (int i = 0; i < qntC; i++)
+    {
+        if (clientes[i].idade >= 18 && clientes[i].idade <=25)
+        {
+            separador();
+            printf("O cliente %s tem entre 18 e 25 anos\n", clientes[i].nome);
+            getchar();
+            getchar();
+            limparTela();
+            cont++;
+        }
+    }
+    separador();
+    printf("No total %d clientes tem entre 18 e 25 anos.", cont);
+    separador();
+    getchar();
+    limparTela();
+}
+
+void maisPontos(Clientes *clientes, int qntC){
+    bool tem = false;
+    for (int i = 0; i < qntC; i++)
+    {
+        if (clientes[i].pontos >= 1000)
+        {
+            printf("O cliente %s tem %d pontos.\n", clientes[i].nome, clientes[i].pontos);
+            getchar();
+            getchar();
+            tem = true;
+        }
+    }
+    if (!(tem))
+    {
+        separador();
+        printf("Não existem clientes cadastrados com mais de 1000 pontos.\n");
+        getchar();
+        getchar();
+        limparTela();
+    }
+    
 }

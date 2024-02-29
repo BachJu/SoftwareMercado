@@ -7,27 +7,18 @@
 #include <stdlib.h>
 
 //Cadastra um novo produto
-void novoProduto(Produtos *novoP){
+void novoProduto(Produtos *novoP, int idProd){
     //Limpa a tela
     limparTela();
 
     //Separador estético
     separador();
 
+    novoP->id = idProd + 1;
+    printf("Esse é o id do produto: %d\n", novoP->id);
+
     //Declara variável de contole para comparar com o que o usuário digitar
     bool verifica = false;
-    
-    //Pede o identificador do novo produto que será cadastrado
-    printf("Digite o codigo do produto: ");
-    scanf(" %d", &novoP->id);
-
-    //Verifica se é um identificador válido
-    while (novoP->id < 0)
-    {
-        printf("Esse valor nao e um numero valido.\n");
-        printf("Digite um identificador valido");
-        scanf(" %d", &novoP->id);
-    }
     
     //Pede o setor do novo produto
     printf("Digite o setor do produto: ");
@@ -242,14 +233,13 @@ int atualizaProdutos(Produtos *lista, int qntProd){
 
     //Separador estético
     separador();
-    int aux,j;
     bool verifica = false;
     int index = 0;
     int i =0;
-    char nome[50];
-    printf("Digite o nome do produto que será alterado: ");
-    scanf(" %[^\n]s", nome);
-    while (i < qntProd && strcmp(lista[i].nomeProd, nome) !=0)
+    int id;
+    printf("Digite o id do produto que será alterado: ");
+    scanf(" %d", &id);
+    while (i < qntProd && id != lista[i].id)
     {
         i++;
     }
@@ -270,85 +260,17 @@ int atualizaProdutos(Produtos *lista, int qntProd){
             {
             case 1:
                 separador();
-
-                printf("Digite um novo ID para o produto %s: ", lista[i].nomeProd);
-                scanf(" %d", &lista[i].id);
                 verifica = false;
-                while (!(verifica))
-                {
-                    verifica = false;
-                    j = 0;
-                    while (j < i && lista[j].id != lista[i].id)
-                    {
-                        j++;
-                    }
-                    if (lista[j].id == lista[i].id && i != j)
-                    {
-                        aux = lista[j].id;
-                        while (aux == lista[i].id)
-                        {
-                            printf("Esse número de ID já foi utilizado.\nPor gentileza, digite um ID diferente.\n");
-                            scanf(" %d", &lista[i].id);
-                        }   
-                    }
-                    else{
-                        j = i + 1;
-                        while (j > i && j < qntProd && lista[i].id != lista[j].id)
-                        {
-                            j++;
-                        }
-                        if (lista[j].id == lista[i].id)
-                        {
-                            aux = lista[j].id;
-                            while (aux == lista[i].id)
-                            {
-                                printf("Esse número de ID já foi utilizado.\nPor gentileza, digite um ID diferente.\n");
-                                scanf(" %d", &lista[i].id);
-                            } 
-                        }
-                        else{
-                            verifica = true;
-                        }
-                    }
-                }    
-                printf("Esse é o novo ID: %d\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].id);
-                getchar();
-                getchar();
-                break;
-            case 2:
                 printf("Digite um novo setor para o produto %s: ", lista[i].nomeProd);
                 scanf(" %[^\n]s", lista[i].setor);
-                //Declara variáveis de contole para comparar com o que o usuário digitar
-                bool hig = false, limp = false, beb = false, frio = false, pad = false, aco = false;
-                while (!(hig || limp || beb || frio || pad || aco))
+                while (!(verifica))
                 {
-                    if (strcmp(lista[i].setor, "Higiene") == 0)
+                    if (strcmp(lista[i].setor, "Higiene") == 0 || strcmp(lista[i].setor, "Limpeza") == 0 || strcmp(lista[i].setor, "Bebidas") == 0 || strcmp(lista[i].setor, "Frios") == 0 || strcmp(lista[i].setor, "Padaria") == 0 || strcmp(lista[i].setor, "Acougue") == 0) 
                     {
-                        hig = true;
-                    }
-                    else if (strcmp(lista[i].setor, "Limpeza") == 0)
-                    {
-                        limp = true;
-                    }
-                    else if (strcmp(lista[i].setor, "Bebidas") == 0)
-                    {
-                        beb = true;
-                    }
-                    else if (strcmp(lista[i].setor, "Frios") == 0)
-                    {
-                        frio = true;
-                    }
-                    else if (strcmp(lista[i].setor, "Padaria") == 0)
-                    {
-                        pad = true;
-                    }
-                    else if (strcmp(lista[i].setor, "Acougue") == 0)
-                    {
-                        aco = true;
-                    }
-                        
+                        verifica = true;
+                    }  
                     //Caso os valores continuem falsos, pede para o usuário digitar uma nova string
-                    if (!(hig || limp || beb || frio || pad || aco))
+                    else
                     {
                         printf("O setor esta incorreto e/ou nao existe.\n");
                         printf("Os setores validos sao: \nAcougue;\nBebidas;\nFrios;\nHigiene;\nLimpeza;\nPadaria;\n");
@@ -358,15 +280,19 @@ int atualizaProdutos(Produtos *lista, int qntProd){
                 printf("Esse é o novo setor: %s\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].setor);
                 getchar();
                 getchar();
+                limparTela();
                 break;
-            case 3:
+            case 2:
+                separador();
                 printf("Digite um novo nome para o produto %s: ", lista[i].nomeProd);
                 scanf(" %[^\n]s", lista[i].nomeProd);
                 printf("Esse é o novo nome: %s\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].nomeProd);
                 getchar();
                 getchar();
+                limparTela();
                 break;
-            case 4:
+            case 3:
+                separador();
                 printf("Digite um novo preco para o produto %s: ", lista[i].nomeProd);
                 scanf(" %lf", &lista[i].preco);
                 while (lista[i].preco < 0)
@@ -377,8 +303,10 @@ int atualizaProdutos(Produtos *lista, int qntProd){
                 printf("Esse é o novo preco: %.2lf\nCaso esteja errado, poderá alterá-lo novamente.", lista[i].preco);
                 getchar();
                 getchar();
+                limparTela();
                 break;
-            case 5:
+            case 4:
+                separador();
                 printf("Digite uma nova data de validade para o produto %s. \n", lista[i].nomeProd);
                 printf("Dia: ");
                 scanf(" %d", &lista[i].validade.dia);
@@ -404,8 +332,10 @@ int atualizaProdutos(Produtos *lista, int qntProd){
                 printf("Esse é a nova data de validade: %d/%d/%d\nCaso esteja errada, poderá alterá-la novamente.", lista[i].validade.dia, lista[i].validade.mes, lista[i].validade.ano);
                 getchar();
                 getchar();
+                limparTela();
                 break;
-            case 6:
+            case 5:
+                separador();
                 printf("Digite uma nova quantidade no estoque para o produto %s: ", lista[i].nomeProd);
                 scanf(" %d", &lista[i].estoque);
                 while (lista[i].estoque < 0)
@@ -416,9 +346,10 @@ int atualizaProdutos(Produtos *lista, int qntProd){
                 printf("Esse é o nova quantidade: %d\nCaso esteja errada, poderá alterá-la novamente.", lista[i].estoque);
                 getchar();
                 getchar();
+                limparTela();
                 break;
             case 9:
-                printf("Saindo...");
+                printf("Voltando para o menu principal...");
                 getchar();
                 getchar();
                 limparTela();
@@ -437,13 +368,16 @@ int atualizaProdutos(Produtos *lista, int qntProd){
 void atualizaArquivoCSV(Produtos *lista, int qntProd, int controle){
     FILE *arquivoCSV;
     arquivoCSV = fopen("Produtos.csv", "r");
-    if (arquivoCSV != NULL && controle == 1)
+    if (arquivoCSV != NULL)
     {
-        arquivoCSV = fopen("Produtos.csv", "w");
-        fprintf(arquivoCSV, "Id;Setor;Nome;Preço;Data de Validade;Estoque\n");
-        for (int i = 0; i < qntProd; i++)
+        if (controle == 1)
         {
-            fprintf(arquivoCSV, "%d;%s;%s;%.2lf;%d/%d/%d;%d\n", lista[i].id, lista[i].setor, lista[i].nomeProd, lista[i].preco, lista[i].validade.dia, lista[i].validade.mes, lista[i].validade.ano, lista[i].estoque);
+            arquivoCSV = fopen("Produtos.csv", "w");
+            fprintf(arquivoCSV, "Id;Setor;Nome;Preço;Data de Validade;Estoque\n");
+            for (int i = 0; i < qntProd; i++)
+            {
+                fprintf(arquivoCSV, "%d;%s;%s;%.2lf;%d/%d/%d;%d\n", lista[i].id, lista[i].setor, lista[i].nomeProd, lista[i].preco, lista[i].validade.dia, lista[i].validade.mes, lista[i].validade.ano, lista[i].estoque);
+            }
         }
         fclose(arquivoCSV);
     }
