@@ -313,9 +313,9 @@ int atualizaCliente(Clientes *clientes, int qntC){
     }
 }
 
-int atualizaPontos(Clientes *clientes, int qntC){
+int atualizaPontos(Clientes *clientes, int qntC, ItensCompra *compras, int qntItens){
     int i =0;
-    int pontos;
+    int pontos =0;
     char cpf[20];
     separador();
     printf("Digite o cpf para atualizar os pontos: ");
@@ -333,14 +333,20 @@ int atualizaPontos(Clientes *clientes, int qntC){
         return 0;
     }
     else{
+        float valorTotal = 0;
+        for (int j = 0; j < qntItens; j++)
+        {
+            if (strcmp(compras[j].cpf, clientes[i].cpf) == 0)
+            {
+                valorTotal += compras[j].total;
+            } 
+        }
         separador();
         printf("Essa é a pontuação atual: %d\n", clientes[i].pontos);
-        printf("Digite a quantidade de pontos a ser acrescentada: ");
-        scanf(" %d", &pontos);
-        while (pontos < 0)
+        while (valorTotal > 0)
         {
-            printf("Quantidade inválida.\nPor gentileza, digite a nova quantidade de pontos: ");
-            scanf(" %d", &pontos);
+            pontos++;
+            valorTotal--;
         }
         clientes[i].pontos += pontos;
         printf("Essa é a nova pontuação: %d", clientes[i].pontos);

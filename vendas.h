@@ -9,10 +9,24 @@ typedef struct Vendas
 
 } Vendas;
 
+typedef struct ItensCompra
+{
+    int idVenda;
+    char cpf[14];
+    int idProd;
+    int qnt;
+    float unit;
+    float total;
+} ItensCompra;
+
+int contItensCSV();
+
+void preencheCompras(ItensCompra *compras);
+
 /*
     Inicia o cadastro de uma nova venda
 */
-void novaVenda(Vendas, *novoV);
+void novaVenda(Vendas *novoV);
 
 
 

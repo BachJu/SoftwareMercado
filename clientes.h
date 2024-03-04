@@ -1,6 +1,7 @@
 #ifndef __CLIENTES_H__
 #define __CLIENTES_H__
 #include "data.h"
+#include "vendas.h"
 
 typedef struct Clientes
 {
@@ -32,7 +33,7 @@ void preencheClientes(Clientes *clientes);
 
 int atualizaCliente(Clientes *clientes, int qntC);
 
-int atualizaPontos(Clientes *clientes, int qntC);
+int atualizaPontos(Clientes *clientes, int qntC, ItensCompra *compras, int qntItens);
 
 /**
  * Atualiza o arquivo "Clientes.csv" com as novas informações

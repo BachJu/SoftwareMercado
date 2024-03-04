@@ -4,20 +4,27 @@
 #include "telas.h"
 #include "produtos.h"
 #include "clientes.h"
+#include "vendas.h"
 
 //Inicializa o main
 int main(){
+
+    //Cria uma variável do tipo "Clientes" (ver "clientes.h")
     Clientes cliente;
     //Cria uma variável do tipo "Produtos" (ver "produtos.h")
     Produtos produto;
 
+    //Cria um ponteiro do tipo "Clientes"
+    Clientes *clientes;
     //Cria um ponteiro do tipo "Produtos"
     Produtos *lista;
-    Clientes *clientes;
+
+    ItensCompra *compras;
 
     //Cria variável do tipo inteiro
     int qntProd;
     int qntC;
+    int qntItens;
 
     //Atribui valor para a variavel inteira com a quantidade de produtos cadastrados no arquivo "Produtos.csv"
     
@@ -32,15 +39,20 @@ int main(){
         //Cria vetor de variáveis do tipo "Produtos" com a quantidade de produtos como máximo 
         qntProd = contProdutosCSV();
         qntC = contClientesCSV();
+        qntItens = contItensCSV();
 
         lista = (Produtos *)malloc(sizeof(Produtos) * qntProd);
-        preencheLista(lista);
         
         clientes = (Clientes *)malloc(sizeof(Clientes) * qntC);
-        preencheClientes(clientes);
+
+        compras = (ItensCompra *)malloc(sizeof(ItensCompra) * qntItens);
         //Chama o menu principal e atribui o valor da opção escolhida na variável de controle "Index"
-        if (lista != NULL && clientes != NULL)
+        if (lista != NULL && clientes != NULL && compras != NULL)
         {
+            preencheLista(lista);
+            preencheClientes(clientes);
+            preencheCompras(compras);
+            
             int idProd = lista[qntProd - 1].id;
             index = menuInicial();
             switch (index)
@@ -60,7 +72,7 @@ int main(){
                     arquivoCSVCliente(cliente);
                     break;
                 case 2:
-                    controle = atualizaPontos(clientes, qntC);
+                    controle = atualizaPontos(clientes, qntC, compras, qntItens);
                     atualizaClientesCSV(clientes, qntC, controle);
                     break;
                 case 3:
@@ -115,6 +127,7 @@ int main(){
             //Limpa o vetor de "Produtos"
             free(lista);
             free(clientes);
+            free(compras);
         }
         else{
             printf("Algo deu errado.");
@@ -130,6 +143,12 @@ int main(){
     {
         free(clientes);
     }
+    if (compras != NULL)
+    {
+        free(compras);
+    }
+    
+
 
     return 0;
 }
