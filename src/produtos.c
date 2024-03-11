@@ -1,6 +1,6 @@
-#include "produtos.h"
-#include "telas.h"
-#include "data.h"
+#include "../include/produtos.h"
+#include "../include/telas.h"
+#include "../include/data.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>
@@ -104,13 +104,13 @@ void arquivoCSV(Produtos p){
     FILE *arqProd;
 
     //Abre o arquivo CSV para leitura
-    arqProd = fopen("Produtos.csv", "r");
+    arqProd = fopen("planilhas/Produtos.csv", "r");
 
     //Caso o arquivo não exista, cria um novo
     if (arqProd == NULL)
     {
         //Arquivo não existe
-        arqProd = fopen("Produtos.csv", "a");
+        arqProd = fopen("planilhas/Produtos.csv", "a");
         //Cria cabeçalho
         fprintf(arqProd, "Id;Setor;Nome;Preço;Data de Validade;Estoque\n");
         //Escreve as informações do novo produto
@@ -121,7 +121,7 @@ void arquivoCSV(Produtos p){
     else{
 
         //Abre o arquivo para acrescentar informações
-        arqProd = fopen("Produtos.csv", "a");
+        arqProd = fopen("planilhas/Produtos.csv", "a");
         //Acrescenta as informações necessárias
         fprintf(arqProd, "\n");
         fprintf(arqProd, "%d;%s;%s;%.2lf;%d/%d/%d;%d", p.id, p.setor, p.nomeProd, p.preco, p.validade.dia, p.validade.mes, p.validade.ano, p.estoque);
@@ -142,7 +142,7 @@ int contProdutosCSV(){
     const char s[2] = ";";
     //Contador de linhas
     int contadorLinha = 0;
-    arq = fopen("Produtos.csv", "r");
+    arq = fopen("planilhas/Produtos.csv", "r");
     if (arq != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
@@ -176,7 +176,7 @@ void preencheLista(Produtos *lista){
     char linha[1000];
     char *campos;
     const char s[2] = ";";
-    csv = fopen("Produtos.csv", "r");
+    csv = fopen("planilhas/Produtos.csv", "r");
     if (csv != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
@@ -367,12 +367,12 @@ int atualizaProdutos(Produtos *lista, int qntProd){
 
 void atualizaArquivoCSV(Produtos *lista, int qntProd, int controle){
     FILE *arquivoCSV;
-    arquivoCSV = fopen("Produtos.csv", "r");
+    arquivoCSV = fopen("planilhas/Produtos.csv", "r");
     if (arquivoCSV != NULL)
     {
         if (controle == 1)
         {
-            arquivoCSV = fopen("Produtos.csv", "w");
+            arquivoCSV = fopen("planilhas/Produtos.csv", "w");
             fprintf(arquivoCSV, "Id;Setor;Nome;Preço;Data de Validade;Estoque\n");
             for (int i = 0; i < qntProd; i++)
             {
