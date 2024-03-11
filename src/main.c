@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "telas.h"
-#include "produtos.h"
-#include "clientes.h"
-#include "vendas.h"
+#include "../include/telas.h"
+#include "../include/produtos.h"
+#include "../include/clientes.h"
+#include "../include/vendas.h"
 
 //Inicializa o main
 int main(){

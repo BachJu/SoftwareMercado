@@ -1,7 +1,7 @@
-#include "vendas.h"
-#include "telas.h"
-#include "clientes.h"
-#include "data.h"
+#include "../include/vendas.h"
+#include "../include/telas.h"
+#include "../include/clientes.h"
+#include "../include/data.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -103,16 +103,16 @@ void novoCliente(Clientes *novoC){
 void arquivoCSVCliente(Clientes c){
     FILE *arqClien;
 
-    arqClien = fopen("Clientes.csv", "r");
+    arqClien = fopen("planilhas/Clientes.csv", "r");
     if (arqClien == NULL)
     {
-        arqClien = fopen("Clientes.csv", "w");
+        arqClien = fopen("planilhas/Clientes.csv", "w");
         fprintf(arqClien, "CPF;Nome;Data de Nascimento;Idade;Endereço;Cidade;Estado;Pontos\n");
         fprintf(arqClien, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d\n", c.cpf, c.nome, c.nascimento.dia, c.nascimento.mes, c.nascimento.ano, c.idade, c.endereco, c.cidade, c.estado, c.pontos);
         fclose(arqClien);
     }
     else{
-        arqClien = fopen("Clientes.csv", "a");
+        arqClien = fopen("planilhas/Clientes.csv", "a");
         fprintf(arqClien, "\n");
         fprintf(arqClien, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d", c.cpf, c.nome, c.nascimento.dia, c.nascimento.mes, c.nascimento.ano, c.idade, c.endereco, c.cidade, c.estado, c.pontos);
         fclose(arqClien);
@@ -131,7 +131,7 @@ int contClientesCSV(){
     const char s[2] = ";";
     //Contador de linhas
     int contadorLinha = 0;
-    arq = fopen("Clientes.csv", "r");
+    arq = fopen("planilhas/Clientes.csv", "r");
     if (arq != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
@@ -164,7 +164,7 @@ void preencheClientes(Clientes *clientes){
     char linha[1000];
     char *campos;
     const char s[2] = ";";
-    csv = fopen("Clientes.csv", "r");
+    csv = fopen("planilhas/Clientes.csv", "r");
     if (csv != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
@@ -360,12 +360,12 @@ int atualizaPontos(Clientes *clientes, int qntC, ItensCompra *compras, int qntIt
 
 void atualizaClientesCSV(Clientes *clientes, int qntC, int controle){
     FILE *arqC;
-    arqC = fopen("Clientes.csv", "r");
+    arqC = fopen("planilhas/Clientes.csv", "r");
     if (arqC != NULL)
     {
         if (controle == 1)
         {
-            arqC = fopen("Clientes.csv", "w");
+            arqC = fopen("planilhas/Clientes.csv", "w");
             fprintf(arqC, "CPF;Nome;Nascimento;Idade;Endereço;Cidade;Estado;pontos\n");
             for (int i = 0; i < qntC; i++)
             {

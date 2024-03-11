@@ -1,8 +1,8 @@
-#include "telas.h"
-#include "clientes.h"
-#include "data.h"
-#include "vendas.h"
-#include "produtos.h"
+#include "../include/telas.h"
+#include "../include/clientes.h"
+#include "../include/data.h"
+#include "../include/vendas.h"
+#include "../include/produtos.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -14,7 +14,7 @@ int contItensCSV(){
     char *campos;
     const char s[2] = ";";
     int contadorLinha = 0;
-    arq = fopen("ItensCompras.csv", "r");
+    arq = fopen("planilhas/ItensCompras.csv", "r");
     if (arq != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
@@ -46,7 +46,7 @@ void preencheCompras(ItensCompra *compras){
     char linha[1000];
     char *campos;
     const char s[2] = ";";
-    csv = fopen("ItensCompras.csv", "r");
+    csv = fopen("planilhas/ItensCompras.csv", "r");
     if (csv != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
@@ -102,7 +102,7 @@ int contVendasCSV(){
     char *campos;
     const char s[2] = ";";
     int contadorLinha = 0;
-    arq = fopen("Vendas.csv", "r");
+    arq = fopen("planilhas/Vendas.csv", "r");
     if (arq != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
@@ -134,7 +134,7 @@ void preencheVendas(Vendas *vendas) {
     char linha[1000];
     char *campos;
     const char s[2] = ";";
-    csv = fopen("Vendas.csv", "r");
+    csv = fopen("planilhas/Vendas.csv", "r");
     if (csv != NULL) {
         // fim dos registros, reabrindo para ler os dados
         fseek(csv, 0, SEEK_SET);
@@ -178,7 +178,7 @@ void preencheVendas(Vendas *vendas) {
 
 void salvaVendas(Vendas *lista, int qntVendas){
     FILE *arquivoCSV;
-    arquivoCSV = fopen("Vendas.csv", "w");
+    arquivoCSV = fopen("planilhas/Vendas.csv", "w");
     fprintf(arquivoCSV, "Id;CPF;Data da Compra;Valor Total;Itens\n");
     
     for (int i = 0; i < qntVendas; i++)
@@ -191,7 +191,7 @@ void salvaVendas(Vendas *lista, int qntVendas){
 
 void salvaItens(ItensCompra *lista, int qntItensCompra){
     FILE *arquivoCSV;
-    arquivoCSV = fopen("ItensCompras.csv", "w");
+    arquivoCSV = fopen("planilhas/ItensCompras.csv", "w");
     fprintf(arquivoCSV, "IdVenda;CPF;IdProduto;Quantidade;Unitario;Total\n");
     
     for (int i = 0; i < qntItensCompra; i++)

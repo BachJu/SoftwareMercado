@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
-#include "data.h"
+#include "../include/data.h"
 
 void stringParaData(char *str, Data *data){
     int i = 0, c=0;

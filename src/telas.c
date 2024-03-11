@@ -1,6 +1,6 @@
-#include "telas.h"
-#include "vendas.h"
-#include "clientes.h"
+#include "../include/telas.h"
+#include "../include/vendas.h"
+#include "../include/clientes.h"
 #include <stdio.h>
 #include <stdlib.h>
 
