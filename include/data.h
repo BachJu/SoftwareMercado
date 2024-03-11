@@ -13,6 +13,9 @@ typedef struct Data
 */
 void stringParaData(char *str, Data *data);
 
+/**
+ * @return Uma struct do tipo Data com a data de hoje
+*/
 Data diaAtual();
 
 #endif

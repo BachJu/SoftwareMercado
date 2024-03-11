@@ -94,6 +94,9 @@ int main(){
                 case 5:
                     maisPontos(clientes, qntC);
                     break;
+                case 9:
+                    index = 1;
+                    break;
                 default:
                     break;
                 }
@@ -116,9 +119,19 @@ int main(){
                 case 4:
                     baixoEstoque(lista, qntProd);
                     break;
+                case 9:
+                    index = 1;
+                    break;
                 default:
                     break;
                 }
+                break;
+            case 4:
+                if(tema == '-'){
+                    tema = '=';
+                    break;
+                }
+                tema = '-';
                 break;
             case 9:
                 printf("Saindo do programa...");
@@ -146,23 +159,5 @@ int main(){
             printf("Não foi possível inicar o programa.\n");
         }   
     }
-
-    //Desaloca os vetores para não ter overflow
-    if(lista != NULL)
-    {
-        free(lista);
-    }
-
-    if(clientes != NULL)
-    {
-        free(clientes);
-    }
-    if (compras != NULL)
-    {
-        free(compras);
-    }
-    
-
-
     return 0;
 }
