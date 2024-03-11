@@ -344,7 +344,6 @@ void novaVenda(){
                     free(listaVendas);
                     atualizaArquivoCSV(listaProdutos, qtdeProdutos, 1);
                     free(listaProdutos);
-                    free(novoItem);
                     for(int i = 0; i < qtdeClientes; i++){
                         if(strcmp(listaClientes[i].cpf, cliente.cpf) == 0){
                             index = i;
