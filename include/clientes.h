@@ -1,7 +1,9 @@
+#ifndef __VENDAS_H__
+#include "vendas.h"
+#endif
 #ifndef __CLIENTES_H__
 #define __CLIENTES_H__
 #include "data.h"
-#include "vendas.h"
 
 typedef struct Clientes
 {
@@ -14,6 +16,8 @@ typedef struct Clientes
     char estado[2];
     int pontos;
 } Clientes;
+
+int atualizaPontos(Clientes *clientes, int qntC, ItensCompra *compras, int qntItens);
 
 void novoCliente(Clientes *novoC);
 
@@ -32,8 +36,6 @@ int contClientesCSV();
 void preencheClientes(Clientes *clientes);
 
 int atualizaCliente(Clientes *clientes, int qntC);
-
-int atualizaPontos(Clientes *clientes, int qntC, ItensCompra *compras, int qntItens);
 
 /**
  * Atualiza o arquivo "Clientes.csv" com as novas informações

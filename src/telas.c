@@ -1,4 +1,6 @@
 #include "telas.h"
+#include "vendas.h"
+#include "clientes.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -195,4 +197,18 @@ void separador(){
     }
     printf("\n");
     
+}
+
+void produtoInfos(Produtos *lista, int id){
+    id -= 1;
+    printf("%-40s%s \n", "Nome:", lista[id].nomeProd);
+    printf("%-40sR$%.2f \n", "Preço:", lista[id].preco);
+    printf("%-40s%d \n", "Quantidade em estoque:", lista[id].estoque);
+}
+
+void carrinho(Produtos *listaProdutos, ItensCompra *lista, int primeiroID, int ultimoId){
+    printf("%-25s %-10s %-14s %-14s\n", "NOME", "QUANTIDADE", "VALOR UNITÁRIO", "VALOR TOTAL");
+    for(int i = primeiroID; i < ultimoId; i++){
+        printf("%-25s %-10d %-14.2f %-14.2f\n", listaProdutos[lista[i].idProd - 1].nomeProd, lista[i].qnt, lista[i].unit, lista[i].total);
+    }
 }
