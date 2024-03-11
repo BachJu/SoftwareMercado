@@ -54,14 +54,23 @@ int main(){
             preencheCompras(compras);
             
             int idProd = lista[qntProd - 1].id;
+            limparTela();
             index = menuInicial();
             switch (index)
             {
             case 1:
                 index = menuVendas();
-
-                //novo case aqui
-
+                switch(index)
+                {
+                    case 1:
+                        novaVenda();
+                        break;
+                    case 2:
+                        mostrarCompras();
+                    case 9:
+                        index = 1;
+                        break;
+                }
                 break;
             case 2:
                 index = menuClientes();

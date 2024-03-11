@@ -13,4 +13,6 @@ typedef struct Data
 */
 void stringParaData(char *str, Data *data);
 
+Data diaAtual();
+
 #endif
