@@ -3,6 +3,11 @@
 #include "../include/clientes.h"
 #include <stdio.h>
 #include <stdlib.h>
+#ifdef _WIN32
+#define LIMPAR_TELA "cls"
+#else
+#define LIMPAR_TELA "clear"
+#endif
 
 //Primeiras opções fornecidas
 int menuInicial(){
@@ -173,11 +178,12 @@ int menuAtualizaC(){
 }
 
 //Função para Limpar a tela
-void limparTela(){
+void limparTela()
+{
 
-    //Para Windows "cls"
-    //Para Linuz "clear"
-    system("cls");
+    // Para Windows "cls"
+    // Para Linux "clear"
+    system(LIMPAR_TELA);
 }
 
 //Função estética
