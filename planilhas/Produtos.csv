@@ -1,7 +1,24 @@
 Id;Setor;Nome;Preço;Data de Validade;Estoque
-1;Higiene;sabonete;3.00;6/10/2025;0
-2;Açougue;picanha;50.32;10/10/2026;60
-3;Limpeza;sabão em pó;6.00;12/1/2026;100
-4;Frios;Queijo mussarela de 300g;30.00;12/3/2024;0
-5;Bebidas;Guaraná;5.00;8/6/2026;0
+1;Higiene;Sabonete;3.00;6/10/2025;800
+2;Açougue;Picanha;50.32;10/10/2026;110
+3;Limpeza;Sabão em pó;6.00;12/1/2026;400
+4;Frios;Queijo mussarela de 300g;30.00;12/3/2024;50
+5;Bebidas;Guaraná;5.00;8/6/2026;80
 6;Padaria;Pão de forma;10.00;29/3/2024;100
+7;Higiene;Papel Higiênico;15.00;31/12/2050;800
+8;Higiene;Shampoo;8.00;23/04/2028;200
+9;Frios;Presunto kg;30.00;30/03/2024;9
+10;Açougue;Acém moído kg;35.00;24/04/2024;40
+11;Bebidas;Vinho pérgola;25.99;31/12/2050;92
+12;Padaria;Pão de queijo;5.00;15/03/2024;20
+13;Limpeza;Pinho Sol;11.99;31/12/2050;400
+14;Açougue;Peito de frango kg;21.49;28/03/2024;78
+15;Limpeza;Vassoura;28.39;31/12/9999;512
+16;Padaria;Pão doce Und;7.99;23/03/2024;51
+17;Bebidas;Coca-Cola 2.5L;9.99;31/12/2050;785
+18;Frios;Salame kg;59.90;31/12/2050;136
+19;Bebidas;Cachaça Jamel;18.90;31/12/2050;1500
+20;Higiene;Creme dental;8.49;31/12/2050;2507
+21;Higiene;Escova de dente pct3;15.00;31/12/2050;1080
+22;Higiene;Enxaguante bucal;20.00;31/12/2050;300
+23;Higiene;Fio dental;6.00;31/12/2050;489
