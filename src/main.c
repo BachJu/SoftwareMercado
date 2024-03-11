@@ -19,7 +19,7 @@ int main(){
     //Cria um ponteiro do tipo "Produtos"
     Produtos *lista;
 
-    ItensCompra *compras;
+    Vendas *compras;
 
     //Cria variável do tipo inteiro
     int qntProd;
@@ -39,19 +39,19 @@ int main(){
         //Cria vetor de variáveis do tipo "Produtos" com a quantidade de produtos como máximo 
         qntProd = contProdutosCSV();
         qntC = contClientesCSV();
-        qntItens = contItensCSV();
+        qntItens = contVendasCSV();
 
         lista = (Produtos *)malloc(sizeof(Produtos) * qntProd);
         
         clientes = (Clientes *)malloc(sizeof(Clientes) * qntC);
 
-        compras = (ItensCompra *)malloc(sizeof(ItensCompra) * qntItens);
+        compras = (Vendas *)malloc(sizeof(Vendas) * qntItens);
         //Chama o menu principal e atribui o valor da opção escolhida na variável de controle "Index"
         if (lista != NULL && clientes != NULL && compras != NULL)
         {
             preencheLista(lista);
             preencheClientes(clientes);
-            preencheCompras(compras);
+            preencheVendas(compras);
             
             int idProd = lista[qntProd - 1].id;
             limparTela();
@@ -135,14 +135,19 @@ int main(){
             }
             //Limpa o vetor de "Produtos"
             free(lista);
+
+            //Limpa o vetor de "Clientes"
             free(clientes);
+
+            //Limpa o vetor de "Vendas"
             free(compras);
         }
         else{
-            printf("Algo deu errado.");
+            printf("Não foi possível inicar o programa.\n");
         }   
     }
 
+    //Desaloca os vetores para não ter overflow
     if(lista != NULL)
     {
         free(lista);

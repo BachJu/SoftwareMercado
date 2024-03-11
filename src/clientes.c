@@ -57,7 +57,6 @@ void novoCliente(Clientes *novoC){
             scanf(" %[^\n]s", novoC->cpf);
         }
     }
-    printf("CPF: %s", novoC->cpf);
     printf("Digite o seu nome: ");
     scanf(" %[^\n]s", novoC->nome);
     printf("Digite sua data de nascimento.\n");
@@ -314,10 +313,9 @@ int atualizaCliente(Clientes *clientes, int qntC){
     }
 }
 
-int atualizaPontos(Clientes *clientes, int qntC, ItensCompra *compras, int qntItens){
+int atualizaPontos(Clientes *clientes, int qntC, Vendas *compras, int qntItens){
     int i =0;
-    int pontos =0;
-    char cpf[20];
+    char cpf[14];
     separador();
     printf("Digite o cpf para atualizar os pontos: ");
     scanf(" %[^\n]s", cpf);
@@ -327,34 +325,41 @@ int atualizaPontos(Clientes *clientes, int qntC, ItensCompra *compras, int qntIt
     }
     if (i ==  qntC)
     {
-        printf("Esse cpf não está cadastrado.\nPor gentileza, cadaste o cliente antes de alterar a pontuação.");
+        printf("Esse cpf não existe/foi cadastrado.\nPor gentileza, efetue o cadastro antes de alterar a pontuação.");
         getchar();
         getchar();
         limparTela();
         return 0;
     }
     else{
-        float valorTotal = 0;
-        for (int j = 0; j < qntItens; j++)
-        {
-            if (strcmp(compras[j].cpf, clientes[i].cpf) == 0)
-            {
-                valorTotal += compras[j].total;
-            } 
-        }
+        int idVenda;
+        int j =0;
         separador();
-        printf("Essa é a pontuação atual: %d\n", clientes[i].pontos);
-        while (valorTotal > 0)
+        printf("Digite o id da compra: ");
+        scanf(" %d", &idVenda);
+        while (j < qntItens && compras[j].idVenda != idVenda)
         {
-            pontos++;
-            valorTotal--;
+            j++;
         }
-        clientes[i].pontos += pontos;
-        printf("Essa é a nova pontuação: %d", clientes[i].pontos);
-        getchar();
-        getchar();
-        limparTela();
-        return 1;
+        if (j == qntItens || strcmp(compras[j].cpf, cpf)!=0){
+            printf("Essa venda não foi efetuada ou o id da venda pertence a outro cliente.");
+            getchar();
+            getchar();
+            limparTela();
+            return 0;
+        }
+        else{
+            int pontos = clientes[i].pontos;
+            printf("Essa é a pontuação atual: %d\n", clientes[i].pontos);
+            printf("Esse é a quantidade de pontos pela venda: %d\n", (int)compras[j].valorTotal);
+            clientes[i].pontos = 0;
+            clientes[i].pontos = pontos + (int)compras[j].valorTotal;
+            printf("Essa é a nova pontuação: %d\n", clientes[i].pontos);
+            getchar();
+            getchar();
+            limparTela();
+            return 1;
+        }
     }
 }
 

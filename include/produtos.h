@@ -53,6 +53,11 @@ int atualizaProdutos(Produtos *lista, int qntProd);
 */
 void atualizaArquivoCSV(Produtos *lista, int qntProd, int controle);
 
+/**
+ * Mostra ao usuário produtos por setor
+ * @param lista Vetor de registros do tipo "Produto"
+ * @param qntProd Tamanho total do vetor
+*/
 void prodPorSetor(Produtos *lista, int qntProd);
 
 /**

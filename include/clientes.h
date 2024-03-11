@@ -17,10 +17,25 @@ typedef struct Clientes
     int pontos;
 } Clientes;
 
-int atualizaPontos(Clientes *clientes, int qntC, ItensCompra *compras, int qntItens);
+/**
+ * Atualiza a pontuação dos clientes
+ * @param clientes vetor de "Clientes" para atualizar a pontuação no arquivo csv
+ * @param qntC verifica o tamanho do vetor clientes
+ * @param compras vetor de "Compras" para passar o valor total da venda
+ * @param qntItens verifica o tamanho do vetor compras
+*/
+int atualizaPontos(Clientes *clientes, int qntC, Vendas *compras, int qntItens);
 
+/**
+ * Cadastra um novo cliente
+ * @param novoC uma variável do tipo "Clientes" para ser preeenchida
+*/
 void novoCliente(Clientes *novoC);
 
+/**
+ * Atualiza o arquivo CSV
+ * @param c uma variável do tipo "Clientes" para preencher o arquivo
+*/
 void arquivoCSVCliente(Clientes c);
 
  /**
@@ -35,18 +50,33 @@ int contClientesCSV();
 */
 void preencheClientes(Clientes *clientes);
 
+/**
+ * Atualiza o vetor de clientes caso usuário queira fazer alguma atualização
+ * @param clientes um vetor do tipo "Clientes" que será alterado
+ * @param qntC tamanho máximo do vetor
+*/
 int atualizaCliente(Clientes *clientes, int qntC);
 
 /**
  * Atualiza o arquivo "Clientes.csv" com as novas informações
- * @param lista Vetor de registros do tipo "Clientes" que será colocada no arquivo "Clientes.csv"
+ * @param clientes Vetor de registros do tipo "Clientes" que será colocada no arquivo "Clientes.csv"
  * @param qntC Tamanho total do vetor
  * @param controle Recebe o valor "0" ou "1", caso for 1, então o arquivo será alterado
 */
 void atualizaClientesCSV(Clientes *clientes, int qntC, int controle);
 
+/**
+ * Mostra clientes entre 18 e 25 anos
+ * @param clientes Vetor de registros do tipo "Clientes" que mostrará as informações
+ * @param intC Tamanho total do vetor
+*/
 void idadeClientes(Clientes *clientes, int qntC);
 
+/**
+ * Mostra clientes que tem mais de 1000 pontos
+ * @param clientes Vetor de registros do tipo "Clientes" que mostrará as informações
+ * @param intC Tamanho total do vetor
+*/
 void maisPontos(Clientes *clientes, int qntC);
 
 #endif
