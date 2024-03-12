@@ -38,4 +38,5 @@ vendas.o: src/vendas.c
 	gcc -o $(BIN_DIR)/vendas.o -c src/vendas.c -Wall -ggdb
 
 clean:
-	$(RM) $(BIN_DIR) mercadoApp
+	$(RM) mercadoApp.exe
+	$(RM) $(BIN_DIR)
