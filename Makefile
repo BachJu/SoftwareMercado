@@ -4,6 +4,7 @@ ifeq ($(OS),Windows_NT)
 else
 	RM = rm -f
 	MKDIR = mkdir -p
+	LINUX_DELETE = /*.o
 endif
 
 BIN_DIR = bin
@@ -38,5 +39,5 @@ vendas.o: src/vendas.c
 	gcc -o $(BIN_DIR)/vendas.o -c src/vendas.c -Wall -ggdb
 
 clean:
-	$(RM) mercadoApp.exe
-	$(RM) $(BIN_DIR)
+	$(RM) mercadoApp$(EXT)
+	$(RM) $(BIN_DIR)$(LINUX_DELETE)
