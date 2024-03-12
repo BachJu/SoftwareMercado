@@ -11,176 +11,179 @@
 #define LIMPAR_TELA "clear"
 #endif
 
-//Primeiras op√ß√µes fornecidas
-int menuInicial(){
-    //Vari√°vel de controle
+// Primeiras opÁıes fornecidas
+int menuInicial()
+{
+    // Vari·vel de controle
     int index;
-    
-    //Separador est√©tico
+
+    // Separador estÈtico
     separador();
 
-    //Op√ß√µes dispon√≠veis
+    // OpÁıes disponÌveis
     printf("1. Venda\n");
     printf("2. Clientes\n");
     printf("3. Produtos\n");
     printf("4. Mudar tema (Atual: %c)\n", tema);
     printf("9. Sair");
-    
-    //Separador est√©tico
+
+    // Separador estÈtico
     separador();
 
-    //Leitura da op√ß√£o escolhida pelo usu√°rio
+    // Leitura da opÁ„o escolhida pelo usu·rio
     scanf(" %d", &index);
 
     limparTela();
 
-    //Retorna para o programa principal a op√ß√£o escolhida pelo usu√°rio
+    // Retorna para o programa principal a opÁ„o escolhida pelo usu·rio
     return index;
 }
 
-
-//Menu de Vendas
-int menuVendas(){
-    //Limpa a tela
+// Menu de Vendas
+int menuVendas()
+{
+    // Limpa a tela
     limparTela();
 
-    //Vari√°vel de controle
+    // Vari·vel de controle
     int index;
 
-    //Separador est√©tico
+    // Separador estÈtico
     separador();
 
-    //Op√ß√µes para Venda
+    // OpÁıes para Venda
     printf("1. Nova Venda\n");
     printf("2. Listar Venda dos Clientes\n");
     printf("9. Sair");
 
-    //Separador est√©tico
+    // Separador estÈtico
     separador();
-    
-    //Leitura da op√ß√£o escolhida pelo usu√°rio
+
+    // Leitura da opÁ„o escolhida pelo usu·rio
     scanf(" %d", &index);
 
     limparTela();
 
-    //Retorna para o programa principal a op√ß√£o escolhida pelo usu√°rio
+    // Retorna para o programa principal a opÁ„o escolhida pelo usu·rio
     return index;
-
 }
 
-//Menu de Clientes
-int menuClientes(){
-    
-    //Limpa a tela
+// Menu de Clientes
+int menuClientes()
+{
+
+    // Limpa a tela
     limparTela();
 
-    //Vari√°vel de controle
+    // Vari·vel de controle
     int index;
 
-    //Separador est√©tico
+    // Separador estÈtico
     separador();
 
-    //Op√ß√µes para Clientes
+    // OpÁıes para Clientes
     printf("1. Cadastrar Novo Cliente\n");
-    printf("2. Atualizar Pontua√ß√£o\n");
+    printf("2. Atualizar PontuaÁ„o\n");
     printf("3. Atualizar Cliente\n");
     printf("4. Listar Clientes entre 18 e 25\n");
     printf("5. Listar Clientes acima de 1000 pontos\n");
     printf("9. Sair");
 
-    //Separador est√©tico
+    // Separador estÈtico
     separador();
 
-    //Leitura da op√ß√£o escolhida pelo usu√°rio
+    // Leitura da opÁ„o escolhida pelo usu·rio
     scanf(" %d", &index);
 
     limparTela();
 
-    //Retorna para o programa principal a op√ß√£o escolhida pelo usu√°rio
+    // Retorna para o programa principal a opÁ„o escolhida pelo usu·rio
     return index;
 }
 
-//Menu de Produtos
-int menuProdutos(){
-    
-    //Limpa a tela
+// Menu de Produtos
+int menuProdutos()
+{
+
+    // Limpa a tela
     limparTela();
 
-    //Vari√°vel de controle
+    // Vari·vel de controle
     int index;
 
-    //Separador est√©tico
+    // Separador estÈtico
     separador();
 
-    //Op√ß√µes para Produtos
+    // OpÁıes para Produtos
     printf("1. Cadastrar novo produto\n");
     printf("2. Atualizar informacoes do produto\n");
     printf("3. Estoque por setor\n");
     printf("4. Produtos com estoque baixo\n");
     printf("9. Sair");
-    
-    //Separador est√©tico
+
+    // Separador estÈtico
     separador();
 
-    //Leitura da op√ß√£o escolhida pelo usu√°rio
+    // Leitura da opÁ„o escolhida pelo usu·rio
     scanf(" %d", &index);
 
     limparTela();
-    
-    //Retorna para o programa principal a op√ß√£o escolhida pelo usu√°rio
+
+    // Retorna para o programa principal a opÁ„o escolhida pelo usu·rio
     return index;
 }
 
-
-int menuAtualizaProd(){
+int menuAtualizaProd()
+{
     int index;
-    
-    //Separador est√©tico
+
+    // Separador estÈtico
     separador();
 
     printf("O que deseja alterar\n");
     printf("1. Setor\n");
     printf("2. Nome do produto\n");
-    printf("3. Pre√ßo\n");
+    printf("3. PreÁo\n");
     printf("4. Data de validade\n");
     printf("5. Quantidade em estoque\n");
     printf("9. Sair");
-    
-    //Separador est√©tico
+
+    // Separador estÈtico
     separador();
 
     scanf(" %d", &index);
 
     limparTela();
-    
+
     return index;
 }
 
-int menuAtualizaC(){
+int menuAtualizaC()
+{
     int index;
-    
-    //Separador est√©tico
+
+    // Separador estÈtico
     separador();
 
     printf("O que deseja alterar\n");
     printf("1. Nome\n");
     printf("2. Idade\n");
-    printf("3. Endere√ßo\n");
+    printf("3. EndereÁo\n");
     printf("4. Cidade\n");
     printf("5. Estado\n");
     printf("9. Sair");
-    
-    //Separador est√©tico
+
+    // Separador estÈtico
     separador();
 
     scanf(" %d", &index);
 
     limparTela();
-    
+
     return index;
 }
 
-//Fun√ß√£o para Limpar a tela
+// FunÁ„o para Limpar a tela
 void limparTela()
 {
 
@@ -190,11 +193,13 @@ void limparTela()
 }
 
 char tema = '=';
-//Fun√ß√£o est√©tica
-void separador(){
+// FunÁ„o estÈtica
+void separador()
+{
     int TAM = 100;
-    //Cria duas linhas de "-" para separar dados e est√©tica
-    if(tema == '-'){
+    // Cria duas linhas de "-" para separar dados e estÈtica
+    if (tema == '-')
+    {
         printf("\n");
         for (int i = 0; i < TAM; i++)
         {
@@ -214,24 +219,27 @@ void separador(){
         printf("=");
     }
     printf("\n");
-    
+
     return;
 }
 
-void produtoInfos(Produtos *lista, int id){
+void produtoInfos(Produtos *lista, int id)
+{
     id -= 1;
     separador();
     printf("%-40s%-50s \n", "Nome:", lista[id].nomeProd);
-    printf("%-40s R$%-50.2f \n", "Pre√ßo:", lista[id].preco);
+    printf("%-40s R$%-50.2f \n", "PreÁo:", lista[id].preco);
     printf("%-40s%-50d", "Quantidade em estoque:", lista[id].estoque);
     separador();
 }
 
-void carrinho(Produtos *listaProdutos, ItensCompra *lista, int primeiroID, int ultimoId){
-    printf("%-30s%-20s%-22s%-22s", "NOME", "QUANTIDADE", "VALOR UNIT√ÅRIO", "VALOR TOTAL");
+void carrinho(Produtos *listaProdutos, ItensCompra *lista, int primeiroID, int ultimoId)
+{
+    printf("%-30s%-20s%-22s%-22s", "NOME", "QUANTIDADE", "VALOR UNIT¡RIO", "VALOR TOTAL");
     separador();
     double valorTotal = 0;
-    for(int i = primeiroID; i < ultimoId; i++){
+    for (int i = primeiroID; i < ultimoId; i++)
+    {
         printf("%-30s%-20dR$%-19.2fR$%-19.2f\n", listaProdutos[lista[i].idProd - 1].nomeProd, lista[i].qnt, lista[i].unit, lista[i].total);
         valorTotal += lista[i].total;
     }
@@ -240,8 +248,9 @@ void carrinho(Produtos *listaProdutos, ItensCompra *lista, int primeiroID, int u
     printf("\n");
 }
 
-void novaVenda(){
-    limparTela();    
+void novaVenda()
+{
+    limparTela();
     int qtdeClientes = contClientesCSV();
     Clientes *listaClientes = (Clientes *)malloc(sizeof(Clientes) * qtdeClientes);
     preencheClientes(listaClientes);
@@ -251,21 +260,24 @@ void novaVenda(){
     int i = 0;
     bool clienteExiste = false;
     Clientes cliente;
-    while(!(clienteExiste) && i < qtdeClientes){
-        if((strcmp(listaClientes[i].cpf, cpf)) == 0){
+    while (!(clienteExiste) && i < qtdeClientes)
+    {
+        if ((strcmp(listaClientes[i].cpf, cpf)) == 0)
+        {
             clienteExiste = true;
             cliente = listaClientes[i];
         }
         i++;
     }
-    if(!(clienteExiste)){
+    if (!(clienteExiste))
+    {
         limparTela();
-        printf("Cliente n√£o cadastrado, cadastre-se primeiro \nPara voltar ao menu principal pressione [ENTER] \n");
+        printf("Cliente n„o cadastrado, cadastre-se primeiro \nPara voltar ao menu principal pressione [ENTER] \n");
         getchar();
         getchar();
         return;
     }
-    
+
     int qtdeCompras = contItensCSV();
     int iniciaEm = qtdeCompras;
     ItensCompra *compras = (ItensCompra *)malloc(sizeof(ItensCompra) * qtdeCompras);
@@ -277,7 +289,8 @@ void novaVenda(){
 
     int index = 0;
     ItensCompra *novoItem;
-    while(true){
+    while (true)
+    {
         limparTela();
         printf("O que deseja fazer Sr(a). %s?", cliente.nome);
         separador();
@@ -287,146 +300,157 @@ void novaVenda(){
         separador();
         scanf("%d", &index);
 
-        switch(index){
-            case 1:
+        switch (index)
+        {
+        case 1:
+            limparTela();
+            printf("Digite o ID do produto que deseja adicionar ao carrinho: ");
+            int id = 0;
+            int retorno = scanf("%d", &id);
+            while (id > qtdeProdutos || id < 1 || retorno != 1)
+            {
                 limparTela();
-                printf("Digite o ID do produto que deseja adicionar ao carrinho: ");
-                int id = 0;
-                int retorno = scanf("%d", &id);
-                while(id > qtdeProdutos || id < 1 || retorno != 1){
-                    limparTela();
-                    printf("ID inv√°lido, digite outro: ");
-                    scanf("%d", &id);
-                }
+                printf("ID inv·lido, digite outro: ");
+                scanf("%d", &id);
+            }
+            limparTela();
+            produtoInfos(listaProdutos, id);
+            if (listaProdutos[id - 1].estoque <= 0)
+            {
+                printf("N„o h· estoque disponÌvel\n Pressione [ENTER] para continuar");
+                getchar();
+                getchar();
+                break;
+            }
+            int unidades;
+            printf("Digite quantas unidades quer: ");
+            retorno = scanf("%d", &unidades);
+            while (retorno != 1)
+            {
                 limparTela();
                 produtoInfos(listaProdutos, id);
-                if(listaProdutos[id - 1].estoque <= 0){
-                    printf("N√£o h√° estoque dispon√≠vel\n Pressione [ENTER] para continuar");
-                    getchar();
-                    getchar();
-                    break;
-                }
-                int unidades;
-                printf("Digite quantas unidades quer: ");
+                printf("INVALIDO\nDigite quantas unidades quer: ");
                 retorno = scanf("%d", &unidades);
-                while(retorno != 1){
-                    limparTela();
-                    produtoInfos(listaProdutos, id);
-                    printf("INVALIDO\nDigite quantas unidades quer: ");
-                    retorno = scanf("%d", &unidades);
-                }
-                if(unidades > listaProdutos[id - 1].estoque){
-                    limparTela();
-                    produtoInfos(listaProdutos, id);
-                    printf("Quantidade n√£o dispon√≠vel\nPressione [ENTER] para continuar");
-                    getchar();
-                    getchar();
-                    break;
-                }
-                listaProdutos[id - 1].estoque -= unidades;
-                int idVenda;
-                if(iniciaEm == 0){
-                    idVenda = 1;
-                } else {
-                    idVenda = compras[iniciaEm - 1].idVenda + 1;
-                }
-                novoItem = (ItensCompra *)malloc(sizeof(ItensCompra));
-                strcpy(novoItem->cpf, cliente.cpf);
-                novoItem->idProd = id;
-                novoItem->idVenda = idVenda;
-                novoItem->qnt = unidades;
-                novoItem->total = listaProdutos[id - 1].preco * unidades;
-                novoItem->unit = listaProdutos[id - 1].preco;
-
-                adicionaCompra(&compras, &qtdeCompras, *novoItem);
-                free(novoItem);
+            }
+            if (unidades > listaProdutos[id - 1].estoque)
+            {
+                limparTela();
+                produtoInfos(listaProdutos, id);
+                printf("Quantidade n„o disponÌvel\nPressione [ENTER] para continuar");
+                getchar();
+                getchar();
                 break;
-            case 2:
+            }
+            listaProdutos[id - 1].estoque -= unidades;
+            int idVenda;
+            if (iniciaEm == 0)
+            {
+                idVenda = 1;
+            }
+            else
+            {
+                idVenda = compras[iniciaEm - 1].idVenda + 1;
+            }
+            novoItem = (ItensCompra *)malloc(sizeof(ItensCompra));
+            strcpy(novoItem->cpf, cliente.cpf);
+            novoItem->idProd = id;
+            novoItem->idVenda = idVenda;
+            novoItem->qnt = unidades;
+            novoItem->total = listaProdutos[id - 1].preco * unidades;
+            novoItem->unit = listaProdutos[id - 1].preco;
+
+            adicionaCompra(&compras, &qtdeCompras, *novoItem);
+            free(novoItem);
+            break;
+        case 2:
+            limparTela();
+            carrinho(listaProdutos, compras, iniciaEm, qtdeCompras);
+            printf("1. Fechar a compra\n");
+            printf("2. Cancelar compra\n");
+            printf("9. Voltar\n");
+            printf("O que deseja fazer?\n");
+            retorno = scanf("%d", &index);
+            while (((index < 1 || index > 2) && index != 9) || retorno != 1)
+            {
                 limparTela();
                 carrinho(listaProdutos, compras, iniciaEm, qtdeCompras);
                 printf("1. Fechar a compra\n");
                 printf("2. Cancelar compra\n");
                 printf("9. Voltar\n");
+                printf("OPCAO INVALIDA, DIGITE OUTRA\n");
                 printf("O que deseja fazer?\n");
                 retorno = scanf("%d", &index);
-                while(((index < 1 || index > 2) && index != 9) || retorno != 1){
-                    limparTela();
-                    carrinho(listaProdutos, compras, iniciaEm, qtdeCompras);
-                    printf("1. Fechar a compra\n");
-                    printf("2. Cancelar compra\n");
-                    printf("9. Voltar\n");
-                    printf("OPCAO INVALIDA, DIGITE OUTRA\n");
-                    printf("O que deseja fazer?\n");
-                    retorno = scanf("%d", &index);
-                }
-                double valorTotal = 0;
-                int totalProdutos = 0;
-                switch (index)
+            }
+            double valorTotal = 0;
+            int totalProdutos = 0;
+            switch (index)
+            {
+            case 1:
+                for (int i = iniciaEm; i < qtdeCompras; i++)
                 {
-                case 1:
-                    for(int i = iniciaEm; i < qtdeCompras; i++){
-                        valorTotal += compras[i].total;
-                        totalProdutos += 1;
-                    }
-                    int qtdeVendas = contVendasCSV();
-                    Vendas *listaVendas = (Vendas *)malloc(sizeof(Vendas) * (qtdeVendas + 1));
-                    preencheVendas(listaVendas);
-                    strcpy(listaVendas[qtdeVendas].cpf, cliente.cpf);
-                    listaVendas[qtdeVendas].data = diaAtual();
-                    listaVendas[qtdeVendas].idVenda = compras[iniciaEm].idVenda;
-                    listaVendas[qtdeVendas].qtdeProd = totalProdutos;
-                    listaVendas[qtdeVendas].valorTotal = valorTotal;
-                    qtdeVendas += 1;
-                    salvaItens(compras, qtdeCompras);
-                    free(compras);
-                    salvaVendas(listaVendas, qtdeVendas);
-                    free(listaVendas);
-                    atualizaArquivoCSV(listaProdutos, qtdeProdutos, 1);
-                    free(listaProdutos);
-                    for(int i = 0; i < qtdeClientes; i++){
-                        if(strcmp(listaClientes[i].cpf, cliente.cpf) == 0){
-                            index = i;
-                        }
-                    }
-                    listaClientes[index].pontos += (int)valorTotal;
-
-                    atualizaClientesCSV(listaClientes, qtdeClientes, 1);
-                    limparTela();
-                    printf("Parab√©ns %s!\n Sua compra no valor de %.2f foi concluida com sucesso!\n", cliente.nome, valorTotal);
-                    printf("Voc√™ recebeu um total de %d pontos por essa compra! Voc√™ agora tem %d pontos!\n", (int)valorTotal, listaClientes[index].pontos);
-                    free(listaClientes);
-                    printf("Pressione [ENTER] para continuar...");
-                    getchar();
-                    getchar();
-                    return;
-                    break;
-                case 2:
-                    free(novoItem);
-                    free(compras);
-                    free(listaProdutos);
-                    free(listaClientes);
-                    return;
-                    break;
-                case 9:
-                    break;
-                default:
-                    break;
+                    valorTotal += compras[i].total;
+                    totalProdutos += 1;
                 }
+                int qtdeVendas = contVendasCSV();
+                Vendas *listaVendas = (Vendas *)malloc(sizeof(Vendas) * (qtdeVendas + 1));
+                preencheVendas(listaVendas);
+                strcpy(listaVendas[qtdeVendas].cpf, cliente.cpf);
+                listaVendas[qtdeVendas].data = diaAtual();
+                listaVendas[qtdeVendas].idVenda = compras[iniciaEm].idVenda;
+                listaVendas[qtdeVendas].qtdeProd = totalProdutos;
+                listaVendas[qtdeVendas].valorTotal = valorTotal;
+                qtdeVendas += 1;
+                salvaItens(compras, qtdeCompras);
+                free(compras);
+                salvaVendas(listaVendas, qtdeVendas);
+                free(listaVendas);
+                atualizaArquivoCSV(listaProdutos, qtdeProdutos, 1);
+                free(listaProdutos);
+                for (int i = 0; i < qtdeClientes; i++)
+                {
+                    if (strcmp(listaClientes[i].cpf, cliente.cpf) == 0)
+                    {
+                        index = i;
+                    }
+                }
+                listaClientes[index].pontos += (int)valorTotal;
+
+                atualizaClientesCSV(listaClientes, qtdeClientes, 1);
+                limparTela();
+                printf("ParabÈns %s!\n Sua compra no valor de %.2f foi concluida com sucesso!\n", cliente.nome, valorTotal);
+                printf("VocÍ recebeu um total de %d pontos por essa compra! VocÍ agora tem %d pontos!\n", (int)valorTotal, listaClientes[index].pontos);
+                free(listaClientes);
+                printf("Pressione [ENTER] para continuar...");
+                getchar();
+                getchar();
+                return;
                 break;
-            case 9:
+            case 2:
                 free(novoItem);
                 free(compras);
                 free(listaProdutos);
                 free(listaClientes);
                 return;
                 break;
-
-
+            case 9:
+                break;
+            default:
+                break;
+            }
+            break;
+        case 9:
+            free(novoItem);
+            free(compras);
+            free(listaProdutos);
+            free(listaClientes);
+            return;
+            break;
         }
     }
 }
 
-void mostrarCompras(){
+void mostrarCompras()
+{
     int qtdeClientes = contClientesCSV();
     Clientes *listaClientes = (Clientes *)malloc(sizeof(Clientes) * qtdeClientes);
     preencheClientes(listaClientes);
@@ -441,16 +465,19 @@ void mostrarCompras(){
     int clienteIndex;
     bool clienteExiste = false;
     int i = 0;
-    while(!(clienteExiste) && i < qtdeClientes){
-        if(strcmp(listaClientes[i].cpf, userInput) == 0 || strcmp(listaClientes[i].nome, userInput) ==0) {
+    while (!(clienteExiste) && i < qtdeClientes)
+    {
+        if (strcmp(listaClientes[i].cpf, userInput) == 0 || strcmp(listaClientes[i].nome, userInput) == 0)
+        {
             clienteIndex = i;
             clienteExiste = true;
         }
         i++;
     }
-    if(!(clienteExiste)){
+    if (!(clienteExiste))
+    {
         limparTela();
-        printf("Cliente n√£o localizado\nPressione [ENTER] para continuar...");
+        printf("Cliente n„o localizado\nPressione [ENTER] para continuar...");
         getchar();
         getchar();
         return;
@@ -460,8 +487,10 @@ void mostrarCompras(){
     separador();
     printf("%-25s%-20s%-20s", "DATA DA COMPRA", "VALOR DA COMPRA", "QUANTIDADE DE PRODUTOS");
     separador();
-    for(int c = 0; c < qtdeVendas; c++){
-        if(strcmp(listaVendas[c].cpf, listaClientes[clienteIndex].cpf) == 0){
+    for (int c = 0; c < qtdeVendas; c++)
+    {
+        if (strcmp(listaVendas[c].cpf, listaClientes[clienteIndex].cpf) == 0)
+        {
             printf("%d/%02d/%-19d%-20.2f%-20d\n", listaVendas[c].data.dia, listaVendas[c].data.mes, listaVendas[c].data.ano, listaVendas[c].valorTotal, listaVendas[c].qtdeProd);
         }
     }

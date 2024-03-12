@@ -1,58 +1,60 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <locale.h>
 #include "../include/telas.h"
 #include "../include/produtos.h"
 #include "../include/clientes.h"
 #include "../include/vendas.h"
 
-//Inicializa o main
-int main(){
-
-    //Cria uma vari√°vel do tipo "Clientes" (ver "clientes.h")
+// Inicializa o main
+int main()
+{
+    setlocale(LC_ALL, "Portuguese_Brazil");
+    // Cria uma vari·vel do tipo "Clientes" (ver "clientes.h")
     Clientes cliente;
-    //Cria uma vari√°vel do tipo "Produtos" (ver "produtos.h")
+    // Cria uma vari·vel do tipo "Produtos" (ver "produtos.h")
     Produtos produto;
 
-    //Cria um ponteiro do tipo "Clientes"
+    // Cria um ponteiro do tipo "Clientes"
     Clientes *clientes;
-    //Cria um ponteiro do tipo "Produtos"
+    // Cria um ponteiro do tipo "Produtos"
     Produtos *lista;
 
     Vendas *compras;
 
-    //Cria vari√°vel do tipo inteiro
+    // Cria vari·vel do tipo inteiro
     int qntProd;
     int qntC;
     int qntItens;
 
-    //Atribui valor para a variavel inteira com a quantidade de produtos cadastrados no arquivo "Produtos.csv"
-    
-    //Inicializa uma vari√°vel inteira com 0 para entrar no menu principal
+    // Atribui valor para a variavel inteira com a quantidade de produtos cadastrados no arquivo "Produtos.csv"
+
+    // Inicializa uma vari·vel inteira com 0 para entrar no menu principal
     int index = 0;
 
     int controle;
 
-    //Menu principal
+    // Menu principal
     while (index != 9)
     {
-        //Cria vetor de vari√°veis do tipo "Produtos" com a quantidade de produtos como m√°ximo 
+        // Cria vetor de vari·veis do tipo "Produtos" com a quantidade de produtos como m·ximo
         qntProd = contProdutosCSV();
         qntC = contClientesCSV();
         qntItens = contVendasCSV();
 
         lista = (Produtos *)malloc(sizeof(Produtos) * qntProd);
-        
+
         clientes = (Clientes *)malloc(sizeof(Clientes) * qntC);
 
         compras = (Vendas *)malloc(sizeof(Vendas) * qntItens);
-        //Chama o menu principal e atribui o valor da op√ß√£o escolhida na vari√°vel de controle "Index"
+        // Chama o menu principal e atribui o valor da opÁ„o escolhida na vari·vel de controle "Index"
         if (lista != NULL && clientes != NULL && compras != NULL)
         {
             preencheLista(lista);
             preencheClientes(clientes);
             preencheVendas(compras);
-            
+
             int idProd = lista[qntProd - 1].id;
             limparTela();
             index = menuInicial();
@@ -60,16 +62,16 @@ int main(){
             {
             case 1:
                 index = menuVendas();
-                switch(index)
+                switch (index)
                 {
-                    case 1:
-                        novaVenda();
-                        break;
-                    case 2:
-                        mostrarCompras();
-                    case 9:
-                        index = 1;
-                        break;
+                case 1:
+                    novaVenda();
+                    break;
+                case 2:
+                    mostrarCompras();
+                case 9:
+                    index = 1;
+                    break;
                 }
                 break;
             case 2:
@@ -127,7 +129,8 @@ int main(){
                 }
                 break;
             case 4:
-                if(tema == '-'){
+                if (tema == '-')
+                {
                     tema = '=';
                     break;
                 }
@@ -140,24 +143,25 @@ int main(){
                 limparTela();
                 break;
             default:
-                printf("N√£o √© uma op√ß√£o v√°lida.");
+                printf("N„o È uma opÁ„o v·lida.");
                 getchar();
                 getchar();
                 limparTela();
                 break;
             }
-            //Limpa o vetor de "Produtos"
+            // Limpa o vetor de "Produtos"
             free(lista);
 
-            //Limpa o vetor de "Clientes"
+            // Limpa o vetor de "Clientes"
             free(clientes);
 
-            //Limpa o vetor de "Vendas"
+            // Limpa o vetor de "Vendas"
             free(compras);
         }
-        else{
-            printf("N√£o foi poss√≠vel inicar o programa.\n");
-        }   
+        else
+        {
+            printf("N„o foi possÌvel inicar o programa.\n");
+        }
     }
     return 0;
 }

@@ -8,7 +8,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int contItensCSV(){
+int contItensCSV()
+{
     FILE *arq;
     char linha[1000];
     char *campos;
@@ -19,7 +20,7 @@ int contItensCSV(){
     {
         // fim dos registros, reabrindo para ler os dados
         fseek(arq, 0, SEEK_SET);
-        // lendo o cabeÃ§alho do arquivo
+        // lendo o cabeçalho do arquivo
         fscanf(arq, " %[^\n]s", linha);
         // alocando memoria para os registros lidos
 
@@ -41,7 +42,8 @@ int contItensCSV(){
     return contadorLinha;
 }
 
-void preencheCompras(ItensCompra *compras){
+void preencheCompras(ItensCompra *compras)
+{
     FILE *csv;
     char linha[1000];
     char *campos;
@@ -51,7 +53,7 @@ void preencheCompras(ItensCompra *compras){
     {
         // fim dos registros, reabrindo para ler os dados
         fseek(csv, 0, SEEK_SET);
-        // lendo o cabeÃ§alho do arquivo
+        // lendo o cabeçalho do arquivo
         fscanf(csv, " %[^\n]s", linha);
         // alocando memoria para os registros lidos
 
@@ -96,7 +98,8 @@ void preencheCompras(ItensCompra *compras){
     }
 }
 
-int contVendasCSV(){
+int contVendasCSV()
+{
     FILE *arq;
     char linha[1000];
     char *campos;
@@ -107,7 +110,7 @@ int contVendasCSV(){
     {
         // fim dos registros, reabrindo para ler os dados
         fseek(arq, 0, SEEK_SET);
-        // lendo o cabeÃ§alho do arquivo
+        // lendo o cabeçalho do arquivo
         fscanf(arq, " %[^\n]s", linha);
         // alocando memoria para os registros lidos
 
@@ -129,43 +132,48 @@ int contVendasCSV(){
     return contadorLinha;
 }
 
-void preencheVendas(Vendas *vendas) {
+void preencheVendas(Vendas *vendas)
+{
     FILE *csv;
     char linha[1000];
     char *campos;
     const char s[2] = ";";
     csv = fopen("planilhas/Vendas.csv", "r");
-    if (csv != NULL) {
+    if (csv != NULL)
+    {
         // fim dos registros, reabrindo para ler os dados
         fseek(csv, 0, SEEK_SET);
-        // lendo o cabeÃ§alho do arquivo
+        // lendo o cabeçalho do arquivo
         fscanf(csv, " %[^\n]s", linha);
         // alocando memoria para os registros lidos
 
         int i = 0;
-        while (fscanf(csv, " %[^\n]s", linha) != EOF) {
+        while (fscanf(csv, " %[^\n]s", linha) != EOF)
+        {
             // separando os dados de uma linha
             campos = strtok(linha, s);
             int campoAtual = 0;
-            while (campos != NULL) {
-                switch (campoAtual) {
-                    case 0:
-                        vendas[i].idVenda = atoi(campos);
-                        break;
-                    case 1:
-                        strcpy(vendas[i].cpf, campos);
-                        break;
-                    case 2:
-                        stringParaData(campos, &vendas[i].data);
-                        break;
-                    case 3:
-                        vendas[i].valorTotal = atof(campos);
-                        break;
-                    case 4:
-                        vendas[i].qtdeProd = atoi(campos);
-                        break;
-                    default:
-                        break;
+            while (campos != NULL)
+            {
+                switch (campoAtual)
+                {
+                case 0:
+                    vendas[i].idVenda = atoi(campos);
+                    break;
+                case 1:
+                    strcpy(vendas[i].cpf, campos);
+                    break;
+                case 2:
+                    stringParaData(campos, &vendas[i].data);
+                    break;
+                case 3:
+                    vendas[i].valorTotal = atof(campos);
+                    break;
+                case 4:
+                    vendas[i].qtdeProd = atoi(campos);
+                    break;
+                default:
+                    break;
                 }
                 campos = strtok(NULL, s);
                 campoAtual++;
@@ -176,11 +184,12 @@ void preencheVendas(Vendas *vendas) {
     }
 }
 
-void salvaVendas(Vendas *lista, int qntVendas){
+void salvaVendas(Vendas *lista, int qntVendas)
+{
     FILE *arquivoCSV;
     arquivoCSV = fopen("planilhas/Vendas.csv", "w");
     fprintf(arquivoCSV, "Id;CPF;Data da Compra;Valor Total;Itens\n");
-    
+
     for (int i = 0; i < qntVendas; i++)
     {
         fprintf(arquivoCSV, "%d;%s;%d/%d/%d;%.2lf;%d\n", lista[i].idVenda, lista[i].cpf, lista[i].data.dia, lista[i].data.mes, lista[i].data.ano, lista[i].valorTotal, lista[i].qtdeProd);
@@ -189,11 +198,12 @@ void salvaVendas(Vendas *lista, int qntVendas){
     fclose(arquivoCSV);
 }
 
-void salvaItens(ItensCompra *lista, int qntItensCompra){
+void salvaItens(ItensCompra *lista, int qntItensCompra)
+{
     FILE *arquivoCSV;
     arquivoCSV = fopen("planilhas/ItensCompras.csv", "w");
     fprintf(arquivoCSV, "IdVenda;CPF;IdProduto;Quantidade;Unitario;Total\n");
-    
+
     for (int i = 0; i < qntItensCompra; i++)
     {
         fprintf(arquivoCSV, "%d;%s;%d;%d;%.2f;%.2f\n", lista[i].idVenda, lista[i].cpf, lista[i].idProd, lista[i].qnt, lista[i].unit, lista[i].total);
@@ -202,16 +212,21 @@ void salvaItens(ItensCompra *lista, int qntItensCompra){
     fclose(arquivoCSV);
 }
 
-void adicionaCompra(ItensCompra **lista, int *qtdeCompras, ItensCompra novoItem) {
+void adicionaCompra(ItensCompra **lista, int *qtdeCompras, ItensCompra novoItem)
+{
     ItensCompra *novoPonteiro = (ItensCompra *)realloc(*lista, sizeof(ItensCompra) * (*qtdeCompras + 1));
 
-    if (novoPonteiro != NULL) {
+    if (novoPonteiro != NULL)
+    {
         *lista = novoPonteiro;
         (*lista)[*qtdeCompras] = novoItem;
         *qtdeCompras += 1;
-    } else {
-        while(true){
-        printf("Erro na realocacao de memoria\n");
+    }
+    else
+    {
+        while (true)
+        {
+            printf("Erro na realocacao de memoria\n");
         }
     }
 }

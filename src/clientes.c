@@ -7,9 +7,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-void novoCliente(Clientes *novoC){
+void novoCliente(Clientes *novoC)
+{
     bool invalido = true, temLetra;
-    
+
     separador();
     printf("Digite o seu cpf no formato XXX.XXX.XXX-XX: ");
     scanf(" %[^\n]s", novoC->cpf);
@@ -29,20 +30,22 @@ void novoCliente(Clientes *novoC){
             {
                 while (novoC->cpf[i] != '.')
                 {
-                    printf("H√° algo de errado no cpf.\nO formato √© XXX.XXX.XXX-XX.\nEst√° faltando um .\nPor gentileza, digite '.'\n");
+                    printf("H· algo de errado no cpf.\nO formato È XXX.XXX.XXX-XX.\nEst· faltando um .\nPor gentileza, digite '.'\n");
                     scanf(" %c", &novoC->cpf[i]);
-                }  
+                }
             }
-            else{
+            else
+            {
                 if (i == 11)
                 {
                     while (novoC->cpf[i] != '-')
                     {
-                        printf("H√° algo de errado no cpf.\nO formato √© XXX.XXX.XXX-XX.\nEst√° faltando um -\nPor gentileza, digite '-'\n");
+                        printf("H· algo de errado no cpf.\nO formato È XXX.XXX.XXX-XX.\nEst· faltando um -\nPor gentileza, digite '-'\n");
                         scanf(" %c", &novoC->cpf[i]);
-                    } 
+                    }
                 }
-                else{
+                else
+                {
                     if (novoC->cpf[i] < '0' || novoC->cpf[i] > '9')
                     {
                         temLetra = true;
@@ -64,33 +67,33 @@ void novoCliente(Clientes *novoC){
     scanf(" %d", &novoC->nascimento.dia);
     while (novoC->nascimento.dia < 0 || novoC->nascimento.dia > 31)
     {
-        printf("Dia inv√°lido.\nDigite o dia: ");
+        printf("Dia inv·lido.\nDigite o dia: ");
         scanf(" %d", &novoC->nascimento.dia);
     }
-    
-    printf("M√™s: ");
+
+    printf("MÍs: ");
     scanf(" %d", &novoC->nascimento.mes);
     while (novoC->nascimento.mes < 0 || novoC->nascimento.mes > 12)
     {
-        printf("M√™s inv√°lido.\nDigite o m√™s: ");
+        printf("MÍs inv·lido.\nDigite o mÍs: ");
         scanf(" %d", &novoC->nascimento.mes);
     }
     printf("Ano: ");
     scanf(" %d", &novoC->nascimento.ano);
-    while (novoC->nascimento.ano > 2023||novoC->nascimento.ano < 0)
+    while (novoC->nascimento.ano > 2023 || novoC->nascimento.ano < 0)
     {
-        printf("Ano inv√°lido.\nDigite o ano: ");
+        printf("Ano inv·lido.\nDigite o ano: ");
         scanf(" %d", &novoC->nascimento.ano);
     }
     printf("Digite a sua idade: ");
     scanf(" %d", &novoC->idade);
     while ((2024 - novoC->nascimento.ano) != novoC->idade && ((2024 - novoC->nascimento.ano) - 1) != novoC->idade)
     {
-        printf("A idade est√° inconsistente com o ano de nascimento.\nPor gentileza, digite a idade novamente: ");
+        printf("A idade est· inconsistente com o ano de nascimento.\nPor gentileza, digite a idade novamente: ");
         scanf(" %d", &novoC->idade);
     }
-    
-    printf("Digite seu endere√ßo: ");
+
+    printf("Digite seu endereÁo: ");
     scanf(" %[^\n]s", novoC->endereco);
     printf("Digite sua cidade: ");
     scanf(" %[^\n]s", novoC->cidade);
@@ -99,18 +102,20 @@ void novoCliente(Clientes *novoC){
     novoC->pontos = 0;
     limparTela();
 }
-void arquivoCSVCliente(Clientes c){
+void arquivoCSVCliente(Clientes c)
+{
     FILE *arqClien;
 
     arqClien = fopen("planilhas/Clientes.csv", "r");
     if (arqClien == NULL)
     {
         arqClien = fopen("planilhas/Clientes.csv", "w");
-        fprintf(arqClien, "CPF;Nome;Data de Nascimento;Idade;Endere√ßo;Cidade;Estado;Pontos\n");
+        fprintf(arqClien, "CPF;Nome;Data de Nascimento;Idade;EndereÁo;Cidade;Estado;Pontos\n");
         fprintf(arqClien, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d\n", c.cpf, c.nome, c.nascimento.dia, c.nascimento.mes, c.nascimento.ano, c.idade, c.endereco, c.cidade, c.estado, c.pontos);
         fclose(arqClien);
     }
-    else{
+    else
+    {
         arqClien = fopen("planilhas/Clientes.csv", "a");
         fprintf(arqClien, "\n");
         fprintf(arqClien, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d", c.cpf, c.nome, c.nascimento.dia, c.nascimento.mes, c.nascimento.ano, c.idade, c.endereco, c.cidade, c.estado, c.pontos);
@@ -118,24 +123,25 @@ void arquivoCSVCliente(Clientes c){
     }
 }
 
-//Conta quantos produtos est√£o resgitrados no arquivo CSV
-int contClientesCSV(){
-    //Abre o arquivo
+// Conta quantos produtos est„o resgitrados no arquivo CSV
+int contClientesCSV()
+{
+    // Abre o arquivo
     FILE *arq;
-    //Caracter para guardar as informa√ß√µes lidas
+    // Caracter para guardar as informaÁıes lidas
     char linha[1000];
-    //Ponteiro para usar a fun√ß√£o strtok
+    // Ponteiro para usar a funÁ„o strtok
     char *campos;
-    //Caracter para sinalizar a "quebra" do token na fun√ß√£o strtok
+    // Caracter para sinalizar a "quebra" do token na funÁ„o strtok
     const char s[2] = ";";
-    //Contador de linhas
+    // Contador de linhas
     int contadorLinha = 0;
     arq = fopen("planilhas/Clientes.csv", "r");
     if (arq != NULL)
     {
         // fim dos registros, reabrindo para ler os dados
         fseek(arq, 0, SEEK_SET);
-        // lendo o cabe√ßalho do arquivo
+        // lendo o cabeÁalho do arquivo
         fscanf(arq, " %[^\n]s", linha);
         // alocando memoria para os registros lidos
 
@@ -155,10 +161,10 @@ int contClientesCSV(){
         fclose(arq);
     }
     return contadorLinha;
-
 }
 
-void preencheClientes(Clientes *clientes){
+void preencheClientes(Clientes *clientes)
+{
     FILE *csv;
     char linha[1000];
     char *campos;
@@ -168,7 +174,7 @@ void preencheClientes(Clientes *clientes){
     {
         // fim dos registros, reabrindo para ler os dados
         fseek(csv, 0, SEEK_SET);
-        // lendo o cabe√ßalho do arquivo
+        // lendo o cabeÁalho do arquivo
         fscanf(csv, " %[^\n]s", linha);
         // alocando memoria para os registros lidos
 
@@ -218,32 +224,34 @@ void preencheClientes(Clientes *clientes){
         }
     }
 }
-int atualizaCliente(Clientes *clientes, int qntC){
-    //Limpa a tela
+int atualizaCliente(Clientes *clientes, int qntC)
+{
+    // Limpa a tela
     limparTela();
 
-    //Separador est√©tico
+    // Separador estÈtico
     separador();
     int i = 0;
     int index = 0;
     char cpf[50];
-    printf("Digite o cpf do cliente que ser√° alterado: ");
+    printf("Digite o cpf do cliente que ser· alterado: ");
     scanf(" %[^\n]s", cpf);
-    while (i < qntC && strcmp(clientes[i].cpf,cpf)!=0)
+    while (i < qntC && strcmp(clientes[i].cpf, cpf) != 0)
     {
         i++;
     }
-    
+
     if (i == qntC)
     {
-        printf("N√£o foi poss√≠vel encontrar o cliente.\nCadastre o cliente na sess√£o de cadastro.\n");
+        printf("N„o foi possÌvel encontrar o cliente.\nCadastre o cliente na sess„o de cadastro.\n");
         getchar();
         getchar();
         limparTela();
         return 0;
     }
-    else{
-        while (index !=9)
+    else
+    {
+        while (index != 9)
         {
             index = menuAtualizaC();
             switch (index)
@@ -252,7 +260,7 @@ int atualizaCliente(Clientes *clientes, int qntC){
                 separador();
                 printf("Digite o novo nome: ");
                 scanf(" %[^\n]s", clientes[i].nome);
-                printf("Esse √© o novo nome %s.\nCaso esteja errado, poder√° alter√°-lo novamente", clientes[i].nome);
+                printf("Esse È o novo nome %s.\nCaso esteja errado, poder· alter·-lo novamente", clientes[i].nome);
                 getchar();
                 getchar();
                 limparTela();
@@ -263,19 +271,19 @@ int atualizaCliente(Clientes *clientes, int qntC){
                 scanf(" %d", &clientes[i].idade);
                 while (clientes[i].idade <= 0)
                 {
-                    printf("N√£o √© uma idade v√°lida.\nPor gentileza, digite uma nova idade.\n");
+                    printf("N„o È uma idade v·lida.\nPor gentileza, digite uma nova idade.\n");
                     scanf(" %d", &clientes[i].idade);
                 }
-                printf("Esse √© a nova idade %d.\nCaso esteja errado, poder√° alter√°-la novamente", clientes[i].idade);
+                printf("Esse È a nova idade %d.\nCaso esteja errado, poder· alter·-la novamente", clientes[i].idade);
                 getchar();
                 getchar();
                 limparTela();
                 break;
             case 3:
                 separador();
-                printf("Digite o novo endere√ßo: ");
+                printf("Digite o novo endereÁo: ");
                 scanf(" %[^\n]s", clientes[i].endereco);
-                printf("Esse √© o novo endere√ßo %s.\nCaso esteja errado, poder√° alter√°-lo novamente", clientes[i].endereco);
+                printf("Esse È o novo endereÁo %s.\nCaso esteja errado, poder· alter·-lo novamente", clientes[i].endereco);
                 getchar();
                 getchar();
                 limparTela();
@@ -284,7 +292,7 @@ int atualizaCliente(Clientes *clientes, int qntC){
                 separador();
                 printf("Digite a nova cidade: ");
                 scanf(" %[^\n]s", clientes[i].cidade);
-                printf("Esse √© a nova cidade %s.\nCaso esteja errado, poder√° alter√°-la novamente", clientes[i].cidade);
+                printf("Esse È a nova cidade %s.\nCaso esteja errado, poder· alter·-la novamente", clientes[i].cidade);
                 getchar();
                 getchar();
                 limparTela();
@@ -293,7 +301,7 @@ int atualizaCliente(Clientes *clientes, int qntC){
                 separador();
                 printf("Digite o novo estado: ");
                 scanf(" %[^\n]s", clientes[i].estado);
-                printf("Esse √© o novo estado %s.\nCaso esteja errado, poder√° alter√°-lo novamente", clientes[i].estado);
+                printf("Esse È o novo estado %s.\nCaso esteja errado, poder· alter·-lo novamente", clientes[i].estado);
                 getchar();
                 getchar();
                 limparTela();
@@ -305,7 +313,7 @@ int atualizaCliente(Clientes *clientes, int qntC){
                 limparTela();
                 break;
             default:
-                printf("N√£o √© um digito v√°lido");
+                printf("N„o È um digito v·lido");
                 break;
             }
         }
@@ -313,8 +321,9 @@ int atualizaCliente(Clientes *clientes, int qntC){
     }
 }
 
-int atualizaPontos(Clientes *clientes, int qntC, Vendas *compras, int qntItens){
-    int i =0;
+int atualizaPontos(Clientes *clientes, int qntC, Vendas *compras, int qntItens)
+{
+    int i = 0;
     char cpf[14];
     separador();
     printf("Digite o cpf para atualizar os pontos: ");
@@ -323,17 +332,18 @@ int atualizaPontos(Clientes *clientes, int qntC, Vendas *compras, int qntItens){
     {
         i++;
     }
-    if (i ==  qntC)
+    if (i == qntC)
     {
-        printf("Esse cpf n√£o existe/foi cadastrado.\nPor gentileza, efetue o cadastro antes de alterar a pontua√ß√£o.");
+        printf("Esse cpf n„o existe/foi cadastrado.\nPor gentileza, efetue o cadastro antes de alterar a pontuaÁ„o.");
         getchar();
         getchar();
         limparTela();
         return 0;
     }
-    else{
+    else
+    {
         int idVenda;
-        int j =0;
+        int j = 0;
         separador();
         printf("Digite o id da compra: ");
         scanf(" %d", &idVenda);
@@ -341,20 +351,22 @@ int atualizaPontos(Clientes *clientes, int qntC, Vendas *compras, int qntItens){
         {
             j++;
         }
-        if (j == qntItens || strcmp(compras[j].cpf, cpf)!=0){
-            printf("Essa venda n√£o foi efetuada ou o id da venda pertence a outro cliente.");
+        if (j == qntItens || strcmp(compras[j].cpf, cpf) != 0)
+        {
+            printf("Essa venda n„o foi efetuada ou o id da venda pertence a outro cliente.");
             getchar();
             getchar();
             limparTela();
             return 0;
         }
-        else{
+        else
+        {
             int pontos = clientes[i].pontos;
-            printf("Essa √© a pontua√ß√£o atual: %d\n", clientes[i].pontos);
-            printf("Esse √© a quantidade de pontos pela venda: %d\n", (int)compras[j].valorTotal);
+            printf("Essa È a pontuaÁ„o atual: %d\n", clientes[i].pontos);
+            printf("Esse È a quantidade de pontos pela venda: %d\n", (int)compras[j].valorTotal);
             clientes[i].pontos = 0;
             clientes[i].pontos = pontos + (int)compras[j].valorTotal;
-            printf("Essa √© a nova pontua√ß√£o: %d\n", clientes[i].pontos);
+            printf("Essa È a nova pontuaÁ„o: %d\n", clientes[i].pontos);
             getchar();
             getchar();
             limparTela();
@@ -363,7 +375,8 @@ int atualizaPontos(Clientes *clientes, int qntC, Vendas *compras, int qntItens){
     }
 }
 
-void atualizaClientesCSV(Clientes *clientes, int qntC, int controle){
+void atualizaClientesCSV(Clientes *clientes, int qntC, int controle)
+{
     FILE *arqC;
     arqC = fopen("planilhas/Clientes.csv", "r");
     if (arqC != NULL)
@@ -371,23 +384,24 @@ void atualizaClientesCSV(Clientes *clientes, int qntC, int controle){
         if (controle == 1)
         {
             arqC = fopen("planilhas/Clientes.csv", "w");
-            fprintf(arqC, "CPF;Nome;Nascimento;Idade;Endere√ßo;Cidade;Estado;pontos\n");
+            fprintf(arqC, "CPF;Nome;Nascimento;Idade;EndereÁo;Cidade;Estado;pontos\n");
             for (int i = 0; i < qntC; i++)
             {
                 fprintf(arqC, "%s;%s;%d/%d/%d;%d;%s;%s;%s;%d\n",
-                clientes[i].cpf, clientes[i].nome, clientes[i].nascimento.dia, clientes[i].nascimento.mes, clientes[i].nascimento.ano,
-                clientes[i].idade, clientes[i].endereco, clientes[i].cidade, clientes[i].estado, clientes[i].pontos);
-            }    
+                        clientes[i].cpf, clientes[i].nome, clientes[i].nascimento.dia, clientes[i].nascimento.mes, clientes[i].nascimento.ano,
+                        clientes[i].idade, clientes[i].endereco, clientes[i].cidade, clientes[i].estado, clientes[i].pontos);
+            }
         }
         fclose(arqC);
     }
 }
 
-void idadeClientes(Clientes *clientes, int qntC){
+void idadeClientes(Clientes *clientes, int qntC)
+{
     int cont = 0;
     for (int i = 0; i < qntC; i++)
     {
-        if (clientes[i].idade >= 18 && clientes[i].idade <=25)
+        if (clientes[i].idade >= 18 && clientes[i].idade <= 25)
         {
             separador();
             printf("O cliente %s tem entre 18 e 25 anos\n", clientes[i].nome);
@@ -404,7 +418,8 @@ void idadeClientes(Clientes *clientes, int qntC){
     limparTela();
 }
 
-void maisPontos(Clientes *clientes, int qntC){
+void maisPontos(Clientes *clientes, int qntC)
+{
     bool tem = false;
     for (int i = 0; i < qntC; i++)
     {
@@ -419,10 +434,9 @@ void maisPontos(Clientes *clientes, int qntC){
     if (!(tem))
     {
         separador();
-        printf("N√£o existem clientes cadastrados com mais de 1000 pontos.\n");
+        printf("N„o existem clientes cadastrados com mais de 1000 pontos.\n");
         getchar();
         getchar();
         limparTela();
     }
-    
 }
