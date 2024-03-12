@@ -19,7 +19,7 @@ void novoCliente(Clientes *novoC){
         temLetra = false;
         while ((strlen(novoC->cpf) < 14) || (strlen(novoC->cpf) > 14))
         {
-            printf("Cpf inválido.\nDigite o seu cpf: ");
+            printf("Cpf muito longo/curto.\nDigite o seu cpf no formato XXX.XXX.XXX-XX: ");
             scanf(" %[^\n]s", novoC->cpf);
             invalido = true;
         }
@@ -64,22 +64,22 @@ void novoCliente(Clientes *novoC){
     scanf(" %d", &novoC->nascimento.dia);
     while (novoC->nascimento.dia < 0 || novoC->nascimento.dia > 31)
     {
-        printf("Dia invalido.\nDigite o dia: ");
+        printf("Dia inválido.\nDigite o dia: ");
         scanf(" %d", &novoC->nascimento.dia);
     }
     
-    printf("Mes: ");
+    printf("Mês: ");
     scanf(" %d", &novoC->nascimento.mes);
     while (novoC->nascimento.mes < 0 || novoC->nascimento.mes > 12)
     {
-        printf("Mes invalido.\nDigite o mes: ");
+        printf("Mês inválido.\nDigite o mês: ");
         scanf(" %d", &novoC->nascimento.mes);
     }
     printf("Ano: ");
     scanf(" %d", &novoC->nascimento.ano);
     while (novoC->nascimento.ano > 2023||novoC->nascimento.ano < 0)
     {
-        printf("Ano invalido.\nDigite o ano: ");
+        printf("Ano inválido.\nDigite o ano: ");
         scanf(" %d", &novoC->nascimento.ano);
     }
     printf("Digite a sua idade: ");

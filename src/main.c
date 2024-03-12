@@ -140,7 +140,7 @@ int main(){
                 limparTela();
                 break;
             default:
-                printf("Nao e uma opcao valida");
+                printf("Não é uma opção válida.");
                 getchar();
                 getchar();
                 limparTela();
